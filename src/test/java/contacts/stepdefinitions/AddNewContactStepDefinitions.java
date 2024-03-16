@@ -1,6 +1,8 @@
 package contacts.stepdefinitions;
 
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 
+import org.apache.http.HttpException;
 import org.junit.runner.RunWith;
 
 import contacts.model.Contact;
@@ -18,6 +21,8 @@ import contacts.model.User;
 import contacts.pages.AddContactPage;
 import contacts.pages.ContactListPage;
 import contacts.pages.MainPage;
+import contacts.service.UserService;
+import helpers.Logger;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features="src/test/resources/features")
@@ -26,17 +31,21 @@ public class AddNewContactStepDefinitions {
 	private MainPage mainPage;
 	private ContactListPage contactListPage;
 	private AddContactPage addContactPage;
+	
+	private UserService userService = new UserService();
 	private Contact contact;
+	private User user = User.generate();
+	
+	@Before
+	public void registerUser() throws HttpException {
+		userService.addUser(user);
+		Logger.logUserInfo(user.toString());
+	}
 
     @Given("^I am on the contact list page$")
     public void iAmOnTheContactListPage() {
-        contactListPage.navigate();
-        
-        // TODO move this into precondition
-        if (contactListPage.isOpen()) {
-        	contactListPage.logout();
-        	mainPage.login(new User("davestar@email.com", "1234567"));
-        }
+    	mainPage.navigate()
+    		.login(user);
     }
 
     @When("^I click on the \"Add a New Contact\" button$")
@@ -48,6 +57,7 @@ public class AddNewContactStepDefinitions {
     public void iFillInTheFollowingDetails(DataTable dataTable) {
     	assertTrue(addContactPage.isOpen(), addContactPage.title() + " page did not open");
     	
+    	// TODO research datatable to object transformation
     	Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
     	
     	contact = Contact.fromMap(data);
@@ -64,5 +74,16 @@ public class AddNewContactStepDefinitions {
     public void iShouldSeeAddedContactInTheContactList() {
     	assertTrue(contactListPage.isOpen(), contactListPage.title() + " page did not open");
         assertTrue(contactListPage.containsContact(contact), "Added contact is not in the contact list");
+    }
+    
+    @After
+    public void deleteUser() {
+    	try {
+    		userService.deleteUser(user);
+    	} catch (HttpException e) {
+    		Logger.logUserInfo(e.getMessage());
+		}
+    	
+    	Logger.logUserInfo("Test user successfully deleted");
     }
 }

@@ -12,7 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import contacts.model.Contact;
 
 @DefaultUrl(BasePage.BASE_URL + "/contactList")
-public class ContactListPage extends BasePage {
+public class ContactListPage extends BasePage<ContactListPage> {
 	
 	public static final String PAGE_TITLE = "My Contacts";
 
@@ -80,16 +80,13 @@ public class ContactListPage extends BasePage {
 	@FindBy(id = "logout")
 	WebElementFacade logoutButton;
 	
-	public void navigate() {
-		open();
-	}
-	
 	public void logout() {
 		logoutButton.click();
 	}
 
-	public void clickAddNewContactButton() {
+	public ContactListPage clickAddNewContactButton() {
 		addContactButton.click();
+		return this;
 	}
 
 	private ContactData contactToTableData(Contact contact) {
@@ -142,16 +139,16 @@ public class ContactListPage extends BasePage {
 		}
 		
 		List<ContactData> contactsInTable = contactsTableRows.stream().map((row) -> readContactData(row)).toList();
-		
-		ContactData contactData = contactToTableData(contact);
-		
-		System.out.println("Added contact: " + contactData);
-		
 		return contactsInTable.contains(contactToTableData(contact));
 	}
 
 	@Override
 	protected String pageTitle() {
 		return PAGE_TITLE;
+	}
+
+	@Override
+	protected ContactListPage self() {
+		return this;
 	}
 }

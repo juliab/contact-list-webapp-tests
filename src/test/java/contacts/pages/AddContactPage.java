@@ -7,7 +7,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl(BasePage.BASE_URL + "/addContact")
-public class AddContactPage extends BasePage {
+public class AddContactPage extends BasePage<AddContactPage> {
 	
 	public static final String PAGE_TITLE = "Add Contact";
 	
@@ -47,15 +47,17 @@ public class AddContactPage extends BasePage {
 	@FindBy(id="submit")
 	WebElementFacade submitButton;
 	
-	public void clickSubmitButton() {
+	public AddContactPage clickSubmitButton() {
 		submitButton.click();
+		return this;
     }
 	
-	public void waitForContactToBeAdded() {
+	public AddContactPage waitForContactToBeAdded() {
 		waitFor((d) -> !isOpen());
+		return this;
 	}
 
-    public void fillContactDetails(Contact contact) {
+    public AddContactPage fillContactDetails(Contact contact) {
     	firstNameField.sendKeys(contact.firstName());
     	lastNameField.sendKeys(contact.lastName());
     	dateOfBirthField.sendKeys(contact.dob());
@@ -67,10 +69,16 @@ public class AddContactPage extends BasePage {
     	stateOrProvinceField.sendKeys(contact.stateOrProvince());
     	postalCodeField.sendKeys(contact.postalCode());
     	countryField.sendKeys(contact.country());
+    	return this;
     }
 
 	@Override
 	protected String pageTitle() {
 		return PAGE_TITLE;
+	}
+
+	@Override
+	protected AddContactPage self() {
+		return this;
 	}
 }
