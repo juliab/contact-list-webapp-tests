@@ -92,6 +92,12 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	private ContactData contactToTableData(Contact contact) {
 		String name = contact.firstName() + " " + contact.lastName();
 		
+		String dob = contact.dob() != null ? contact.dob() : "";
+		
+		String email = contact.email().toLowerCase();
+		
+		String phone = contact.phoneNumber() != null ? contact.phoneNumber() : "";
+		
 		String address = contact.addressLine1() != null ? contact.addressLine1() : "";
 		address += contact.addressLine2() != null ? " " + contact.addressLine2() : "";
 		
@@ -99,13 +105,15 @@ public class ContactListPage extends BasePage<ContactListPage> {
 		cityStatePostalCode += contact.stateOrProvince() != null ? " " + contact.stateOrProvince() : "";
 		cityStatePostalCode += contact.postalCode() != null ? " " + contact.postalCode() : "";
 		
+		String country = contact.country() != null ? contact.country() : "";
+		
 		return new ContactData(name.trim(), 
-				contact.dob(), 
-				contact.email(), 
-				contact.phoneNumber(), 
+				dob,
+				email, 
+				phone, 
 				address.trim(),
 				cityStatePostalCode.trim(), 
-				contact.country());
+				country);
 	}
 
 	private ContactData readContactData(WebElementFacade row) {
@@ -127,8 +135,6 @@ public class ContactListPage extends BasePage<ContactListPage> {
 		
 		ContactData contactData = new ContactData(name, birthdate, email, phone, address, cityStatePostalCode, country);
 		
-		System.out.println(contactData);
-		
 		return contactData;
 	}
 
@@ -139,6 +145,13 @@ public class ContactListPage extends BasePage<ContactListPage> {
 		}
 		
 		List<ContactData> contactsInTable = contactsTableRows.stream().map((row) -> readContactData(row)).toList();
+		
+		System.out.println("Contacts read from contact table:");
+		contactsInTable.forEach((c) -> System.out.println(c));
+		
+		System.out.println("Searched contact:");
+		System.out.println(contactToTableData(contact));
+		
 		return contactsInTable.contains(contactToTableData(contact));
 	}
 

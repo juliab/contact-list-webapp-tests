@@ -1,8 +1,8 @@
 package contacts.stepdefinitions;
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -36,6 +36,11 @@ public class AddNewContactStepDefinitions {
 	private Contact contact;
 	private User user = User.generate();
 	
+	@DataTableType
+    public Contact contactEntry(Map<String, String> entry) {
+        return Contact.fromMap(entry);
+    }
+	
 	@Before
 	public void registerUser() throws HttpException {
 		userService.addUser(user);
@@ -54,26 +59,23 @@ public class AddNewContactStepDefinitions {
     }
 
     @When("^I fill in the following details:$")
-    public void iFillInTheFollowingDetails(DataTable dataTable) {
+    public void iFillInTheFollowingDetails(Contact contact) {
+    	this.contact = contact;
+    	
     	assertTrue(addContactPage.isOpen(), addContactPage.title() + " page did not open");
-    	
-    	// TODO research datatable to object transformation
-    	Map<String, String> data = dataTable.asMaps(String.class, String.class).get(0);
-    	
-    	contact = Contact.fromMap(data);
-        addContactPage.fillContactDetails(contact);
+    	addContactPage.fillContactDetails(contact);
     }
 
     @When("^I click on the \"Submit\" button$")
     public void iClickOnSubmitButton() {
-    	addContactPage.clickSubmitButton();
-    	addContactPage.waitForContactToBeAdded();
+    	addContactPage.clickSubmitButton()
+    		.waitForContactToBeAdded();
     }
 
     @Then("^I should see added contact in the contact list$")
     public void iShouldSeeAddedContactInTheContactList() {
     	assertTrue(contactListPage.isOpen(), contactListPage.title() + " page did not open");
-        assertTrue(contactListPage.containsContact(contact), "Added contact is not in the contact list");
+    	assertTrue(contactListPage.containsContact(contact), "Added contact is not in the contact list");
     }
     
     @After
