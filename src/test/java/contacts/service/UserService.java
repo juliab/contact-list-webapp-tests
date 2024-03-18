@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 
 import static io.restassured.RestAssured.*;
-import static org.junit.Assert.assertNotNull;
 
 import org.apache.http.HttpException;
 import org.apache.http.HttpStatus;
@@ -56,7 +55,9 @@ public class UserService {
      */
 	public void deleteUser(User user) throws HttpException {
 		
-		assertNotNull(user.getToken(), "User must have a token");
+		if (user.getToken().isEmpty()) {
+			throw new HttpException("User must have a token to be deleted");
+		}
 		
 		// Set base URI and path for the user deletion endpoint
 		baseURI = BASE_URL;
