@@ -2,6 +2,9 @@ package contacts.model;
 
 import java.util.Map;
 
+/**
+ * Represents a contact with various details such as name, date of birth, email, address, etc.
+ */
 public class Contact {
     private String firstName;
     private String lastName;
@@ -15,11 +18,32 @@ public class Contact {
     private String postalCode = "";
     private String country = "";
 
+    /**
+     * Constructs a contact with the specified first name and last name.
+     *
+     * @param firstName The first name of the contact.
+     * @param lastName  The last name of the contact.
+     */
     public Contact(String firstName, String lastName) {
     	this.firstName = firstName;
         this.lastName = lastName;
     }
     
+    /**
+     * Constructs a contact with the specified details.
+     *
+     * @param firstName       The first name of the contact.
+     * @param lastName        The last name of the contact.
+     * @param dob             The date of birth of the contact.
+     * @param email           The email address of the contact.
+     * @param phone           The phone number of the contact.
+     * @param address1        The first line of the address of the contact.
+     * @param address2        The second line of the address of the contact.
+     * @param city            The city of the contact's address.
+     * @param stateOrProvince The state or province of the contact's address.
+     * @param postalCode      The postal code of the contact's address.
+     * @param country         The country of the contact's address.
+     */
     public Contact(String firstName, String lastName, String dob, String email, String phone, String address1,
             String address2, String city, String stateOrProvince, String postalCode, String country) {
         this.firstName = firstName;
@@ -35,6 +59,12 @@ public class Contact {
         this.country = country;
     }
 
+    /**
+     * Creates a contact object from the given map of data.
+     *
+     * @param data The map containing contact details.
+     * @return A new Contact object created from the provided data.
+     */
     public static Contact fromMap(Map<String, String> data) {
     	return new Contact(data.get("First Name"), 
             data.get("Last Name"), 
@@ -49,47 +79,102 @@ public class Contact {
             data.get("Country"));
     }
 
-    public String firstName() {
+    /**
+     * Gets the first name of the contact.
+     *
+     * @return The first name of the contact.
+     */
+    public String getFirstName() {
         return firstName;
     }
 
-    public String lastName() {
+    /**
+     * Gets the last name of the contact.
+     *
+     * @return The last name of the contact.
+     */
+    public String getLastName() {
         return lastName;
     }
 
-    public String dob() {
+    /**
+     * Gets the date of birth of the contact.
+     *
+     * @return The date of birth of the contact.
+     */
+    public String getDateOfBirth() {
         return dob;
     }
 
-    public String email() {
+    /**
+     * Gets the email address of the contact.
+     *
+     * @return The email address of the contact.
+     */
+    public String getEmail() {
         return email;
     }
 
-    public String phoneNumber() {
+    /**
+     * Gets the phone number of the contact.
+     *
+     * @return The phone number of the contact.
+     */
+    public String getPhoneNumber() {
         return phone;
     }
 
-    public String addressLine1() {
+    /**
+     * Gets the first line of the address of the contact.
+     *
+     * @return The first line of the address of the contact.
+     */
+    public String getAddressLine1() {
         return address1;
     }
 
-    public String addressLine2() {
+    /**
+     * Gets the second line of the address of the contact.
+     *
+     * @return The second line of the address of the contact.
+     */
+    public String getAddressLine2() {
         return address2;
     }
 
-    public String city() {
+    /**
+     * Gets the city of the contact's address.
+     *
+     * @return The city of the contact's address.
+     */
+    public String getCity() {
         return city;
     }
 
-    public String stateOrProvince() {
+    /**
+     * Gets the state or province of the contact's address.
+     *
+     * @return The state or province of the contact's address.
+     */
+    public String getStateOrProvince() {
         return stateOrProvince;
     }
 
-    public String postalCode() {
+    /**
+     * Gets the postal code of the contact's address.
+     *
+     * @return The postal code of the contact's address.
+     */
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public String country() {
+    /**
+     * Gets the country of the contact's address.
+     *
+     * @return The country of the contact's address.
+     */
+    public String getCountry() {
         return country;
     }
     

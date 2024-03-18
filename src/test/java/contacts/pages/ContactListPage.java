@@ -11,11 +11,20 @@ import org.openqa.selenium.support.FindBy;
 
 import contacts.model.Contact;
 
+
+/**
+ * Page object representing the Contact List page in the application under test.
+ * This page displays a list of contacts and provides functionality to interact with them.
+ */
 @DefaultUrl(BasePage.BASE_URL + "/contactList")
 public class ContactListPage extends BasePage<ContactListPage> {
 	
+	/**
+     * The title of the page.
+     */
 	public static final String PAGE_TITLE = "My Contacts";
 
+	// Inner class to represent contact data information that can be read from the contact list.
 	class ContactData {
 		private String name;
 		private String birthdate;
@@ -80,32 +89,40 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	@FindBy(id = "logout")
 	WebElementFacade logoutButton;
 	
-	public void logout() {
-		logoutButton.click();
-	}
-
+	/**
+     * Clicks on the "Add a New Contact" button.
+     *
+     * @return The ContactListPage instance.
+     */
 	public ContactListPage clickAddNewContactButton() {
 		addContactButton.click();
 		return this;
 	}
 
+	/**
+     * Logs out of the application by clicking on the logout button.
+     */
+	public void logout() {
+		logoutButton.click();
+	}
+	
 	private ContactData contactToTableData(Contact contact) {
-		String name = contact.firstName() + " " + contact.lastName();
+		String name = contact.getFirstName() + " " + contact.getLastName();
 		
-		String dob = contact.dob() != null ? contact.dob() : "";
+		String dob = contact.getDateOfBirth() != null ? contact.getDateOfBirth() : "";
 		
-		String email = contact.email().toLowerCase();
+		String email = contact.getEmail().toLowerCase();
 		
-		String phone = contact.phoneNumber() != null ? contact.phoneNumber() : "";
+		String phone = contact.getPhoneNumber() != null ? contact.getPhoneNumber() : "";
 		
-		String address = contact.addressLine1() != null ? contact.addressLine1() : "";
-		address += contact.addressLine2() != null ? " " + contact.addressLine2() : "";
+		String address = contact.getAddressLine1() != null ? contact.getAddressLine1() : "";
+		address += contact.getAddressLine2() != null ? " " + contact.getAddressLine2() : "";
 		
-		String cityStatePostalCode = contact.city() != null ? contact.city() : "";
-		cityStatePostalCode += contact.stateOrProvince() != null ? " " + contact.stateOrProvince() : "";
-		cityStatePostalCode += contact.postalCode() != null ? " " + contact.postalCode() : "";
+		String cityStatePostalCode = contact.getCity() != null ? contact.getCity() : "";
+		cityStatePostalCode += contact.getStateOrProvince() != null ? " " + contact.getStateOrProvince() : "";
+		cityStatePostalCode += contact.getPostalCode() != null ? " " + contact.getPostalCode() : "";
 		
-		String country = contact.country() != null ? contact.country() : "";
+		String country = contact.getCountry() != null ? contact.getCountry() : "";
 		
 		return new ContactData(name.trim(), 
 				dob,
@@ -138,6 +155,12 @@ public class ContactListPage extends BasePage<ContactListPage> {
 		return contactData;
 	}
 
+	/**
+     * Checks if the specified contact exists in the contacts table on the page.
+     *
+     * @param contact The contact to be checked for existence.
+     * @return True if the contact exists in the table, otherwise false.
+     */
 	public Boolean containsContact(Contact contact) {
 		
 		if (contactsTableRows.isEmpty()) {
@@ -146,20 +169,24 @@ public class ContactListPage extends BasePage<ContactListPage> {
 		
 		List<ContactData> contactsInTable = contactsTableRows.stream().map((row) -> readContactData(row)).toList();
 		
-		System.out.println("Contacts read from contact table:");
-		contactsInTable.forEach((c) -> System.out.println(c));
-		
-		System.out.println("Searched contact:");
-		System.out.println(contactToTableData(contact));
-		
 		return contactsInTable.contains(contactToTableData(contact));
 	}
 
+	/**
+     * Returns the title of the page.
+     *
+     * @return The title of the page.
+     */
 	@Override
 	protected String pageTitle() {
 		return PAGE_TITLE;
 	}
 
+	/**
+     * Returns the instance of ContactListPage.
+     *
+     * @return The instance of ContactListPage.
+     */
 	@Override
 	protected ContactListPage self() {
 		return this;

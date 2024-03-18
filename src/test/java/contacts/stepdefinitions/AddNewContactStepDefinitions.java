@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
+import utils.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,7 +23,6 @@ import contacts.pages.AddContactPage;
 import contacts.pages.ContactListPage;
 import contacts.pages.MainPage;
 import contacts.service.UserService;
-import helpers.Logger;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features="src/test/resources/features")
@@ -62,7 +62,7 @@ public class AddNewContactStepDefinitions {
     public void iFillInTheFollowingDetails(Contact contact) {
     	this.contact = contact;
     	
-    	assertTrue(addContactPage.isOpen(), addContactPage.title() + " page did not open");
+    	assertTrue(addContactPage.isOpen(), addContactPage.getTitle() + " page did not open");
     	addContactPage.fillContactDetails(contact);
     }
 
@@ -74,7 +74,7 @@ public class AddNewContactStepDefinitions {
 
     @Then("^I should see added contact in the contact list$")
     public void iShouldSeeAddedContactInTheContactList() {
-    	assertTrue(contactListPage.isOpen(), contactListPage.title() + " page did not open");
+    	assertTrue(contactListPage.isOpen(), contactListPage.getTitle() + " page did not open");
     	assertTrue(contactListPage.containsContact(contact), "Added contact is not in the contact list");
     }
     
