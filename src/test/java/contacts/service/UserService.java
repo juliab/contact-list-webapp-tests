@@ -66,7 +66,7 @@ public class UserService {
 		// Send a DELETE request to delete the user
 		Response response = given()
 				.contentType("application/json")
-				.header("Authorization", "Bearer " + user.getToken()).
+				.header("Authorization", "Bearer " + user.getToken().orElseThrow()).
 			when().delete();
 		
 		int statusCode = response.statusCode();

@@ -54,6 +54,9 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	@FindBy(id="submit")
 	WebElementFacade submitButton;
 	
+	@FindBy(id="error")
+	WebElementFacade errorMessage;
+	
 	/**
      * Clicks the submit button to add the contact.
      * 
@@ -95,6 +98,10 @@ public class AddContactPage extends BasePage<AddContactPage> {
     	postalCodeField.sendKeys(contact.getPostalCode());
     	countryField.sendKeys(contact.getCountry());
     	return this;
+    }
+    
+    public String readValidationMessage() {
+    	return errorMessage.getText();
     }
 
 	@Override

@@ -10,6 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 import utils.Logger;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
@@ -68,24 +69,29 @@ public class AddNewContactStepDefinitions {
 
     @When("^I click on the \"Submit\" button$")
     public void iClickOnSubmitButton() {
-    	addContactPage.clickSubmitButton()
-    		.waitForContactToBeAdded();
+    	addContactPage.clickSubmitButton();
     }
 
     @Then("^I should see added contact in the contact list$")
     public void iShouldSeeAddedContactInTheContactList() {
+    	addContactPage.waitForContactToBeAdded();
     	assertTrue(contactListPage.isOpen(), contactListPage.getTitle() + " page did not open");
     	assertTrue(contactListPage.containsContact(contact), "Added contact is not in the contact list");
+    }
+    
+    @Then("I should see a validation message: {string}")
+    public void verifyValidationMessage(String expectedValidationMessage) {
+        String actualMessage = addContactPage.readValidationMessage();
+        assertEquals(expectedValidationMessage, actualMessage);
     }
     
     @After
     public void deleteUser() {
     	try {
     		userService.deleteUser(user);
+    		Logger.logUserInfo("Test user successfully deleted");
     	} catch (HttpException e) {
     		Logger.logUserInfo(e.getMessage());
 		}
-    	
-    	Logger.logUserInfo("Test user successfully deleted");
     }
 }
