@@ -11,11 +11,11 @@ import net.serenitybdd.core.pages.WidgetObject;
  */
 @ImplementedBy(ContactFormImpl.class)
 public interface ContactForm extends WidgetObject {
-	
+
 	/**
-     * Fills in the contact details in the corresponding fields on the page.
-     * 
-     * @param contact The Contact object containing the details to be filled in.
-     */
+	 * Fills in the contact details in the corresponding fields on the page.
+	 * 
+	 * @param contact The Contact object containing the details to be filled in.
+	 */
 	PageObject fillContactDetails(Contact contact);
 }

@@ -191,17 +191,17 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	 * must match the details in the contact list.
 	 * 
 	 * @param contact The contact record to be opened.
-	 * @return True if the contact is found and opened successfully, false if the contact could not be found in the contact list..
+	 * @return True if the contact is found and opened successfully, false if the
+	 *         contact could not be found in the contact list..
 	 */
 	public Boolean clickOnContactRow(Contact contact) {
 		Optional<WebElementFacade> foundRecord = contactsTableRows.stream()
-				.filter((row) -> readContactData(row).equals(contactToTableData(contact)))
-				.findAny();
-		
+				.filter((row) -> readContactData(row).equals(contactToTableData(contact))).findAny();
+
 		if (foundRecord.isEmpty()) {
 			return false;
 		}
-		
+
 		foundRecord.get().click();
 		return true;
 	}

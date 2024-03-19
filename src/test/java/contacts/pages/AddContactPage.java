@@ -12,21 +12,21 @@ import org.openqa.selenium.support.FindBy;
  */
 @DefaultUrl(BasePage.BASE_URL + "/addContact")
 public class AddContactPage extends BasePage<AddContactPage> {
-	
+
 	/**
-     * The title of the page.
-     */
+	 * The title of the page.
+	 */
 	public static final String PAGE_TITLE = "Add Contact";
-	
+
 	@FindBy(id = "add-contact")
-    public ContactForm contactForm;
-	
-	@FindBy(id="submit")
+	public ContactForm contactForm;
+
+	@FindBy(id = "submit")
 	WebElementFacade submitButton;
-	
-	@FindBy(id="error")
+
+	@FindBy(id = "error")
 	WebElementFacade errorMessage;
-	
+
 	@Override
 	protected String pageTitle() {
 		return PAGE_TITLE;
@@ -36,22 +36,22 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	protected AddContactPage self() {
 		return this;
 	}
-	
+
 	/**
-     * Clicks the submit button.
-     * 
-     * @return The instance of the page.
-     */
+	 * Clicks the submit button.
+	 * 
+	 * @return The instance of the page.
+	 */
 	public AddContactPage clickSubmitButton() {
 		submitButton.click();
 		return this;
 	}
-	
+
 	/**
-     * Reads error message on the page.
-     * 
-     * @return Error message text.
-     */
+	 * Reads error message on the page.
+	 * 
+	 * @return Error message text.
+	 */
 	public String readErrorMessage() {
 		return errorMessage.getText();
 	}

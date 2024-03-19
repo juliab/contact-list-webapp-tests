@@ -222,27 +222,25 @@ public class Contact {
 				+ getCity() + '\'' + ", stateOrProvince='" + getStateOrProvince() + '\'' + ", postalCode='"
 				+ getPostalCode() + '\'' + ", country='" + getCountry() + '\'' + '}';
 	}
-	
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contact contact = (Contact) o;
-        return Objects.equals(firstName, contact.firstName) &&
-                Objects.equals(lastName, contact.lastName) &&
-                Objects.equals(dob, contact.dob) &&
-                Objects.equals(email, contact.email) &&
-                Objects.equals(phone, contact.phone) &&
-                Objects.equals(address1, contact.address1) &&
-                Objects.equals(address2, contact.address2) &&
-                Objects.equals(city, contact.city) &&
-                Objects.equals(stateOrProvince, contact.stateOrProvince) &&
-                Objects.equals(postalCode, contact.postalCode) &&
-                Objects.equals(country, contact.country);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstName, lastName, dob, email, phone, address1, address2, city, stateOrProvince, postalCode, country);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Contact contact = (Contact) o;
+		return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName)
+				&& Objects.equals(dob, contact.dob) && Objects.equals(email, contact.email)
+				&& Objects.equals(phone, contact.phone) && Objects.equals(address1, contact.address1)
+				&& Objects.equals(address2, contact.address2) && Objects.equals(city, contact.city)
+				&& Objects.equals(stateOrProvince, contact.stateOrProvince)
+				&& Objects.equals(postalCode, contact.postalCode) && Objects.equals(country, contact.country);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstName, lastName, dob, email, phone, address1, address2, city, stateOrProvince,
+				postalCode, country);
+	}
 }

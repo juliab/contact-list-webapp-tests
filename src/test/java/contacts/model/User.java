@@ -133,7 +133,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", token='" + token.orElse("") + '\'' + '}';
+		return "User{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", token='" + token.orElse("")
+				+ '\'' + '}';
 	}
 
 	/**

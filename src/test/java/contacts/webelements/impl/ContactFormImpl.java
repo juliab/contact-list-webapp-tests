@@ -14,40 +14,40 @@ public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 	public ContactFormImpl(PageObject page, ElementLocator locator, long timeoutInMilliseconds) {
 		super(page, locator, timeoutInMilliseconds);
 	}
-	
-	@FindBy(id="firstName")
+
+	@FindBy(id = "firstName")
 	WebElementFacade firstNameField;
-	
-	@FindBy(id="lastName")
+
+	@FindBy(id = "lastName")
 	WebElementFacade lastNameField;
 
-	@FindBy(id="birthdate")
+	@FindBy(id = "birthdate")
 	WebElementFacade dateOfBirthField;
-	
-	@FindBy(id="email")
+
+	@FindBy(id = "email")
 	WebElementFacade emailField;
-	
-	@FindBy(id="phone")
+
+	@FindBy(id = "phone")
 	WebElementFacade phoneField;
-	
-	@FindBy(id="street1")
+
+	@FindBy(id = "street1")
 	WebElementFacade streetAddress1Field;
-	
-	@FindBy(id="street2")
+
+	@FindBy(id = "street2")
 	WebElementFacade streetAddress2Field;
-	
-	@FindBy(id="city")
+
+	@FindBy(id = "city")
 	WebElementFacade cityField;
-	
-	@FindBy(id="stateProvince")
+
+	@FindBy(id = "stateProvince")
 	WebElementFacade stateOrProvinceField;
-	
-	@FindBy(id="postalCode")
+
+	@FindBy(id = "postalCode")
 	WebElementFacade postalCodeField;
-	
-	@FindBy(id="country")
+
+	@FindBy(id = "country")
 	WebElementFacade countryField;
-	
+
 	@Override
 	public PageObject fillContactDetails(Contact contact) {
 		fillFieldValue(firstNameField, contact.getFirstName());
@@ -61,9 +61,9 @@ public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 		fillFieldValue(stateOrProvinceField, contact.getStateOrProvince());
 		fillFieldValue(postalCodeField, contact.getPostalCode());
 		fillFieldValue(countryField, contact.getCountry());
-    	return getPage();
+		return getPage();
 	}
-	
+
 	private void fillFieldValue(WebElementFacade field, String value) {
 		if (value != null && !field.containsOnlyText(value)) {
 			field.clear();
