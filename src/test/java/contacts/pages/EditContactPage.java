@@ -1,24 +1,20 @@
 package contacts.pages;
 
+import org.openqa.selenium.support.FindBy;
+
 import contacts.webelements.ContactForm;
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-import org.openqa.selenium.support.FindBy;
-
-/**
- * Page Object class representing the "Add Contact" page in the application.
- * This page allows users to add a new contact by filling in their details.
- */
-@DefaultUrl(BasePage.BASE_URL + "/addContact")
-public class AddContactPage extends BasePage<AddContactPage> {
+@DefaultUrl(BasePage.BASE_URL + "/editContact")
+public class EditContactPage extends BasePage<EditContactPage> {
 	
 	/**
      * The title of the page.
      */
-	public static final String PAGE_TITLE = "Add Contact";
+	public static final String PAGE_TITLE = "";
 	
-	@FindBy(id = "add-contact")
+	@FindBy(id = "edit-contact")
     public ContactForm contactForm;
 	
 	@FindBy(id="submit")
@@ -26,15 +22,20 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	
 	@FindBy(id="error")
 	WebElementFacade errorMessage;
-	
+
+	@Override
+	protected EditContactPage self() {
+		return this;
+	}
+
 	@Override
 	protected String pageTitle() {
 		return PAGE_TITLE;
 	}
-
+	
 	@Override
-	protected AddContactPage self() {
-		return this;
+	public Boolean isOpen() {
+		return getDriver().getCurrentUrl().endsWith("/editContact");
 	}
 	
 	/**
@@ -42,7 +43,7 @@ public class AddContactPage extends BasePage<AddContactPage> {
      * 
      * @return The instance of the page.
      */
-	public AddContactPage clickSubmitButton() {
+	public EditContactPage clickSubmitButton() {
 		submitButton.click();
 		return this;
 	}
@@ -55,4 +56,5 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	public String readErrorMessage() {
 		return errorMessage.getText();
 	}
+
 }

@@ -1,6 +1,7 @@
 package contacts.model;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -52,7 +53,7 @@ public class Contact {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dob = Optional.of(dob);
-		this.email = Optional.of(email);
+		this.email = Optional.of(email.toLowerCase());
 		this.phone = Optional.of(phone);
 		this.address1 = Optional.of(address1);
 		this.address2 = Optional.of(address2);
@@ -101,7 +102,7 @@ public class Contact {
 	 */
 	public static Contact fromMap(Map<String, String> data) {
 		Optional<String> dob = Optional.ofNullable(data.get("Date of Birth"));
-		Optional<String> email = Optional.ofNullable(data.get("Email"));
+		Optional<String> email = Optional.ofNullable(data.get("Email").toLowerCase());
 		Optional<String> phone = Optional.ofNullable(data.get("Phone"));
 		Optional<String> address1 = Optional.ofNullable(data.get("Street Address 1"));
 		Optional<String> address2 = Optional.ofNullable(data.get("Street Address 2"));
@@ -221,4 +222,27 @@ public class Contact {
 				+ getCity() + '\'' + ", stateOrProvince='" + getStateOrProvince() + '\'' + ", postalCode='"
 				+ getPostalCode() + '\'' + ", country='" + getCountry() + '\'' + '}';
 	}
+	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Contact contact = (Contact) o;
+        return Objects.equals(firstName, contact.firstName) &&
+                Objects.equals(lastName, contact.lastName) &&
+                Objects.equals(dob, contact.dob) &&
+                Objects.equals(email, contact.email) &&
+                Objects.equals(phone, contact.phone) &&
+                Objects.equals(address1, contact.address1) &&
+                Objects.equals(address2, contact.address2) &&
+                Objects.equals(city, contact.city) &&
+                Objects.equals(stateOrProvince, contact.stateOrProvince) &&
+                Objects.equals(postalCode, contact.postalCode) &&
+                Objects.equals(country, contact.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, dob, email, phone, address1, address2, city, stateOrProvince, postalCode, country);
+    }
 }

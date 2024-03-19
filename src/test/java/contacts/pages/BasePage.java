@@ -49,4 +49,14 @@ public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 		open();
 		return self();
 	}
+	
+	/**
+	 * Waits until the page is loaded.
+	 * 
+	 * @return The instance of current page.
+	 */
+	public T waitForLoad() {
+		waitFor((d) -> self().isOpen());
+		return self();
+	}
 }
