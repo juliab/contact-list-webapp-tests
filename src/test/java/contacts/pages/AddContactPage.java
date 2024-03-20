@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
  * Page Object class representing the "Add Contact" page in the application.
  * This page allows users to add a new contact by filling in their details.
  */
-@DefaultUrl(AppUrls.BASE_URL + AppUrls.ADD_CONTACT_URL_PATH)
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.ADD_CONTACT_WEB_PATH)
 public class AddContactPage extends BasePage<AddContactPage> {
 
 	/**

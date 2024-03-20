@@ -26,7 +26,7 @@ public class UserService {
 
 		// Set base URI and path for the user creation endpoint
 		baseURI = AppUrls.BASE_URL;
-		basePath = AppUrls.ADD_USER_URL_PATH;
+		basePath = AppUrls.ADD_USER_SERVICE_PATH;
 
 		// Send a POST request to create the user
 		Response response = given().contentType("application/json").body(user).when().post();
@@ -53,17 +53,16 @@ public class UserService {
 	 */
 	public void deleteUser(User user) throws HttpException {
 
-		if (user.getToken().isEmpty()) {
-			throw new HttpException("User must have a token to be deleted");
-		}
-
 		// Set base URI and path for the user deletion endpoint
 		baseURI = AppUrls.BASE_URL;
-		basePath = AppUrls.DELETE_USER_URL_PATH;
+		basePath = AppUrls.DELETE_USER_SERVICE_PATH;
 
 		// Send a DELETE request to delete the user
 		Response response = given().contentType("application/json")
-				.header("Authorization", "Bearer " + user.getToken().orElseThrow()).when().delete();
+				.header("Authorization",
+						"Bearer " + user.getToken()
+								.orElseThrow(() -> new HttpException("User must have a token to be deleted")))
+				.when().delete();
 
 		int statusCode = response.statusCode();
 		ResponseBody<?> body = response.body();

@@ -11,7 +11,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
  * Page Object class representing the "Contact Details" page in the application.
  * This page contains contact details and allows user to edit or delete contact.
  */
-@DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_DETAILS_URL_PATH)
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_DETAILS_WEB_PATH)
 public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 
 	/**
@@ -70,7 +70,7 @@ public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 
 	@Override
 	public Boolean isOpen() {
-		return getDriver().getCurrentUrl().contains(AppUrls.CONTACT_DETAILS_URL_PATH);
+		return getDriver().getCurrentUrl().contains(AppUrls.CONTACT_DETAILS_WEB_PATH);
 	}
 
 	/**

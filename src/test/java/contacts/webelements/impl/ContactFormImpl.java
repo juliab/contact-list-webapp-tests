@@ -52,13 +52,13 @@ public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 	public PageObject fillContactDetails(Contact contact) {
 		fillFieldValue(firstNameField, contact.getFirstName());
 		fillFieldValue(lastNameField, contact.getLastName());
-		fillFieldValue(dateOfBirthField, contact.getDateOfBirth());
+		fillFieldValue(dateOfBirthField, contact.getBirthdate());
 		fillFieldValue(emailField, contact.getEmail());
 		fillFieldValue(phoneField, contact.getPhoneNumber());
-		fillFieldValue(streetAddress1Field, contact.getAddressLine1());
-		fillFieldValue(streetAddress2Field, contact.getAddressLine2());
+		fillFieldValue(streetAddress1Field, contact.getStreet1());
+		fillFieldValue(streetAddress2Field, contact.getStreet2());
 		fillFieldValue(cityField, contact.getCity());
-		fillFieldValue(stateOrProvinceField, contact.getStateOrProvince());
+		fillFieldValue(stateOrProvinceField, contact.getStateProvince());
 		fillFieldValue(postalCodeField, contact.getPostalCode());
 		fillFieldValue(countryField, contact.getCountry());
 		return getPage();

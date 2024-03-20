@@ -12,13 +12,13 @@ import java.util.Optional;
 public class Contact {
 	private String firstName;
 	private String lastName;
-	private Optional<String> dob;
+	private Optional<String> birthdate;
 	private Optional<String> email;
 	private Optional<String> phone;
-	private Optional<String> address1;
-	private Optional<String> address2;
+	private Optional<String> street1;
+	private Optional<String> street2;
 	private Optional<String> city;
-	private Optional<String> stateOrProvince;
+	private Optional<String> stateProvince;
 	private Optional<String> postalCode;
 	private Optional<String> country;
 
@@ -52,13 +52,13 @@ public class Contact {
 			String address2, String city, String stateOrProvince, String postalCode, String country) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dob = Optional.of(dob);
+		this.birthdate = Optional.of(dob);
 		this.email = Optional.of(email.toLowerCase());
 		this.phone = Optional.of(phone);
-		this.address1 = Optional.of(address1);
-		this.address2 = Optional.of(address2);
+		this.street1 = Optional.of(address1);
+		this.street2 = Optional.of(address2);
 		this.city = Optional.of(city);
-		this.stateOrProvince = Optional.of(stateOrProvince);
+		this.stateProvince = Optional.of(stateOrProvince);
 		this.postalCode = Optional.of(postalCode);
 		this.country = Optional.of(country);
 	}
@@ -83,13 +83,13 @@ public class Contact {
 			Optional<String> stateOrProvince, Optional<String> postalCode, Optional<String> country) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dob = dob;
+		this.birthdate = dob;
 		this.email = email;
 		this.phone = phone;
-		this.address1 = address1;
-		this.address2 = address2;
+		this.street1 = address1;
+		this.street2 = address2;
 		this.city = city;
-		this.stateOrProvince = stateOrProvince;
+		this.stateProvince = stateOrProvince;
 		this.postalCode = postalCode;
 		this.country = country;
 	}
@@ -138,8 +138,8 @@ public class Contact {
 	 *
 	 * @return The date of birth of the contact.
 	 */
-	public String getDateOfBirth() {
-		return dob.orElse("");
+	public String getBirthdate() {
+		return birthdate.orElse("");
 	}
 
 	/**
@@ -165,8 +165,8 @@ public class Contact {
 	 *
 	 * @return The first line of the address of the contact.
 	 */
-	public String getAddressLine1() {
-		return address1.orElse("");
+	public String getStreet1() {
+		return street1.orElse("");
 	}
 
 	/**
@@ -174,8 +174,8 @@ public class Contact {
 	 *
 	 * @return The second line of the address of the contact.
 	 */
-	public String getAddressLine2() {
-		return address2.orElse("");
+	public String getStreet2() {
+		return street2.orElse("");
 	}
 
 	/**
@@ -192,8 +192,8 @@ public class Contact {
 	 *
 	 * @return The state or province of the contact's address.
 	 */
-	public String getStateOrProvince() {
-		return stateOrProvince.orElse("");
+	public String getStateProvince() {
+		return stateProvince.orElse("");
 	}
 
 	/**
@@ -217,9 +217,9 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "Contact{" + "firstName='" + getFirstName() + '\'' + ", lastName='" + getLastName() + '\'' + ", dob='"
-				+ getDateOfBirth() + '\'' + ", email='" + getEmail() + '\'' + ", phone='" + getPhoneNumber() + '\''
-				+ ", address1='" + getAddressLine1() + '\'' + ", address2='" + getAddressLine2() + '\'' + ", city='"
-				+ getCity() + '\'' + ", stateOrProvince='" + getStateOrProvince() + '\'' + ", postalCode='"
+				+ getBirthdate() + '\'' + ", email='" + getEmail() + '\'' + ", phone='" + getPhoneNumber() + '\''
+				+ ", address1='" + getStreet1() + '\'' + ", address2='" + getStreet2() + '\'' + ", city='"
+				+ getCity() + '\'' + ", stateOrProvince='" + getStateProvince() + '\'' + ", postalCode='"
 				+ getPostalCode() + '\'' + ", country='" + getCountry() + '\'' + '}';
 	}
 
@@ -231,16 +231,16 @@ public class Contact {
 			return false;
 		Contact contact = (Contact) o;
 		return Objects.equals(firstName, contact.firstName) && Objects.equals(lastName, contact.lastName)
-				&& Objects.equals(dob, contact.dob) && Objects.equals(email, contact.email)
-				&& Objects.equals(phone, contact.phone) && Objects.equals(address1, contact.address1)
-				&& Objects.equals(address2, contact.address2) && Objects.equals(city, contact.city)
-				&& Objects.equals(stateOrProvince, contact.stateOrProvince)
+				&& Objects.equals(birthdate, contact.birthdate) && Objects.equals(email, contact.email)
+				&& Objects.equals(phone, contact.phone) && Objects.equals(street1, contact.street1)
+				&& Objects.equals(street2, contact.street2) && Objects.equals(city, contact.city)
+				&& Objects.equals(stateProvince, contact.stateProvince)
 				&& Objects.equals(postalCode, contact.postalCode) && Objects.equals(country, contact.country);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(firstName, lastName, dob, email, phone, address1, address2, city, stateOrProvince,
+		return Objects.hash(firstName, lastName, birthdate, email, phone, street1, street2, city, stateProvince,
 				postalCode, country);
 	}
 }

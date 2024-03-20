@@ -8,7 +8,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 
 import utils.AppUrls;
 
-@DefaultUrl(AppUrls.BASE_URL + AppUrls.EDIT_CONTACT_URL_PATH)
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.EDIT_CONTACT_WEB_PATH)
 public class EditContactPage extends BasePage<EditContactPage> {
 
 	/**
@@ -37,7 +37,7 @@ public class EditContactPage extends BasePage<EditContactPage> {
 
 	@Override
 	public Boolean isOpen() {
-		return getDriver().getCurrentUrl().endsWith(AppUrls.EDIT_CONTACT_URL_PATH);
+		return getDriver().getCurrentUrl().endsWith(AppUrls.EDIT_CONTACT_WEB_PATH);
 	}
 
 	/**

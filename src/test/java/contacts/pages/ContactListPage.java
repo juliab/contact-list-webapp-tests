@@ -19,7 +19,7 @@ import utils.AppUrls;
  * This page displays a list of contacts and provides functionality to interact
  * with them.
  */
-@DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_LIST_URL_PATH)
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_LIST_WEB_PATH)
 public class ContactListPage extends BasePage<ContactListPage> {
 
 	/**
@@ -107,17 +107,17 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	private ContactData contactToTableData(Contact contact) {
 		String name = contact.getFirstName() + " " + contact.getLastName();
 
-		String dob = contact.getDateOfBirth() != null ? contact.getDateOfBirth() : "";
+		String dob = contact.getBirthdate() != null ? contact.getBirthdate() : "";
 
 		String email = contact.getEmail();
 
 		String phone = contact.getPhoneNumber() != null ? contact.getPhoneNumber() : "";
 
-		String address = contact.getAddressLine1() != null ? contact.getAddressLine1() : "";
-		address += contact.getAddressLine2() != null ? " " + contact.getAddressLine2() : "";
+		String address = contact.getStreet1() != null ? contact.getStreet1() : "";
+		address += contact.getStreet2() != null ? " " + contact.getStreet2() : "";
 
 		String cityStatePostalCode = contact.getCity() != null ? contact.getCity() : "";
-		cityStatePostalCode += contact.getStateOrProvince() != null ? " " + contact.getStateOrProvince() : "";
+		cityStatePostalCode += contact.getStateProvince() != null ? " " + contact.getStateProvince() : "";
 		cityStatePostalCode += contact.getPostalCode() != null ? " " + contact.getPostalCode() : "";
 
 		String country = contact.getCountry() != null ? contact.getCountry() : "";
