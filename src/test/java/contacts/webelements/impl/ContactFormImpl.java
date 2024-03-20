@@ -54,7 +54,7 @@ public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 		fillFieldValue(lastNameField, contact.getLastName());
 		fillFieldValue(dateOfBirthField, contact.getBirthdate());
 		fillFieldValue(emailField, contact.getEmail());
-		fillFieldValue(phoneField, contact.getPhoneNumber());
+		fillFieldValue(phoneField, contact.getPhone());
 		fillFieldValue(streetAddress1Field, contact.getStreet1());
 		fillFieldValue(streetAddress2Field, contact.getStreet2());
 		fillFieldValue(cityField, contact.getCity());

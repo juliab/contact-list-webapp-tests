@@ -156,7 +156,7 @@ public class Contact {
 	 *
 	 * @return The phone number of the contact.
 	 */
-	public String getPhoneNumber() {
+	public String getPhone() {
 		return phone.orElse("");
 	}
 
@@ -217,7 +217,7 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "Contact{" + "firstName='" + getFirstName() + '\'' + ", lastName='" + getLastName() + '\'' + ", dob='"
-				+ getBirthdate() + '\'' + ", email='" + getEmail() + '\'' + ", phone='" + getPhoneNumber() + '\''
+				+ getBirthdate() + '\'' + ", email='" + getEmail() + '\'' + ", phone='" + getPhone() + '\''
 				+ ", address1='" + getStreet1() + '\'' + ", address2='" + getStreet2() + '\'' + ", city='"
 				+ getCity() + '\'' + ", stateOrProvince='" + getStateProvince() + '\'' + ", postalCode='"
 				+ getPostalCode() + '\'' + ", country='" + getCountry() + '\'' + '}';

@@ -25,6 +25,7 @@ import contacts.pages.ContactDetailsPage;
 import contacts.pages.ContactListPage;
 import contacts.pages.EditContactPage;
 import contacts.pages.MainPage;
+import contacts.service.ContactService;
 import contacts.service.UserService;
 
 @RunWith(CucumberWithSerenity.class)
@@ -38,6 +39,7 @@ public class ContactManagementStepDefinitions {
 	private EditContactPage editContactPage;
 
 	private UserService userService = new UserService();
+	private ContactService contactService = new ContactService();
 	private Contact contact;
 	private User user = User.generate();
 
@@ -58,14 +60,10 @@ public class ContactManagementStepDefinitions {
 	}
 
 	@Given("^my contact list contains one contact with the following details:$")
-	public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) {
+	public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
 		this.contact = contact;
-
-		contactListPage.clickAddNewContactButton();
-		addContactPage.getContactForm()
-			.fillContactDetails(contact);
-		addContactPage.clickSubmitButton();
-		contactListPage.waitForLoad();
+		
+		contactService.addContact(user, contact);
 	}
 
 	@When("^I click on the \"Add a New Contact\" button$")
@@ -78,8 +76,7 @@ public class ContactManagementStepDefinitions {
 		this.contact = contact;
 
 		assertTrue(addContactPage.isOpen(), addContactPage.getTitle() + " page did not open");
-		addContactPage.getContactForm()
-			.fillContactDetails(contact);
+		addContactPage.getContactForm().fillContactDetails(contact);
 	}
 
 	@When("^I click on the \"Submit\" button$")
@@ -122,8 +119,7 @@ public class ContactManagementStepDefinitions {
 		this.contact = contact;
 
 		assertTrue(editContactPage.isOpen(), editContactPage.getTitle() + " page did not open");
-		editContactPage.getContactForm()
-			.fillContactDetails(contact);
+		editContactPage.getContactForm().fillContactDetails(contact);
 	}
 
 	@After

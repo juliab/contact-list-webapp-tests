@@ -9,8 +9,6 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.Optional;
-
 import contacts.model.Contact;
 import utils.AppUrls;
 
@@ -111,7 +109,7 @@ public class ContactListPage extends BasePage<ContactListPage> {
 
 		String email = contact.getEmail();
 
-		String phone = contact.getPhoneNumber() != null ? contact.getPhoneNumber() : "";
+		String phone = contact.getPhone() != null ? contact.getPhone() : "";
 
 		String address = contact.getStreet1() != null ? contact.getStreet1() : "";
 		address += contact.getStreet2() != null ? " " + contact.getStreet2() : "";
@@ -185,25 +183,19 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	}
 
 	/**
-	 * Clicks on the specified contact row in the contact list table.
+	 * Clicks on the row corresponding to the given contact in the contacts table.
 	 * 
 	 * This method searches for the specified contact record within the contact
 	 * list. For the contact to be successfully found, all contact details provided
 	 * must match the details in the contact list.
 	 * 
-	 * @param contact The contact record to be opened.
-	 * @return True if the contact is found and opened successfully, false if the
-	 *         contact could not be found in the contact list..
+	 * @param contact The Contact object representing the contact to be clicked.
+	 * @throws RuntimeException if the contact is not found in the contact list table.
 	 */
-	public Boolean clickOnContactRow(Contact contact) {
-		Optional<WebElementFacade> foundRecord = contactsTableRows.stream()
-				.filter((row) -> readContactData(row).equals(contactToTableData(contact))).findAny();
-
-		if (foundRecord.isEmpty()) {
-			return false;
-		}
-
-		foundRecord.get().click();
-		return true;
+	public void clickOnContactRow(Contact contact) {
+		WebElementFacade foundRecord = contactsTableRows.stream()
+				.filter((row) -> readContactData(row).equals(contactToTableData(contact))).findAny()
+				.orElseThrow(() -> new RuntimeException("Contact " + contact + " was not found in the contact list table"));
+		foundRecord.click();
 	}
 }

@@ -50,5 +50,4 @@ public class ContactService {
 					"Could not create contact. Status code: " + statusCode + ". Response body: " + body.asPrettyString());
 		}
 	}
-
 }
