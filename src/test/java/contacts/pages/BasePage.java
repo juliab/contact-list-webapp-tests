@@ -11,11 +11,6 @@ import net.serenitybdd.core.pages.PageObject;
 public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 
 	/**
-	 * The base URL of the contact list application.
-	 */
-	public final static String BASE_URL = "https://thinking-tester-contact-list.herokuapp.com";
-
-	/**
 	 * Abstract method to return the instance of the current page. Each subclass
 	 * must implement this method to return its own instance.
 	 * 

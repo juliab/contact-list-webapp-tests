@@ -3,6 +3,7 @@ package contacts.pages;
 import org.openqa.selenium.support.FindBy;
 
 import contacts.model.User;
+import utils.AppUrls;
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 
@@ -10,7 +11,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
  * Page object representing the main page of the contact list application. This
  * page allows users to log in using their credentials.
  */
-@DefaultUrl(BasePage.BASE_URL)
+@DefaultUrl(AppUrls.BASE_URL)
 public class MainPage extends BasePage<MainPage> {
 
 	/**

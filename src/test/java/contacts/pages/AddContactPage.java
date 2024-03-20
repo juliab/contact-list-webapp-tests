@@ -1,6 +1,7 @@
 package contacts.pages;
 
 import contacts.webelements.ContactForm;
+import utils.AppUrls;
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
  * Page Object class representing the "Add Contact" page in the application.
  * This page allows users to add a new contact by filling in their details.
  */
-@DefaultUrl(BasePage.BASE_URL + "/addContact")
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.ADD_CONTACT_URL_PATH)
 public class AddContactPage extends BasePage<AddContactPage> {
 
 	/**

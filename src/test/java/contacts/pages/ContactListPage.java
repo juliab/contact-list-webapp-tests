@@ -12,13 +12,14 @@ import org.openqa.selenium.support.FindBy;
 import java.util.Optional;
 
 import contacts.model.Contact;
+import utils.AppUrls;
 
 /**
  * Page object representing the Contact List page in the application under test.
  * This page displays a list of contacts and provides functionality to interact
  * with them.
  */
-@DefaultUrl(BasePage.BASE_URL + "/contactList")
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_LIST_URL_PATH)
 public class ContactListPage extends BasePage<ContactListPage> {
 
 	/**

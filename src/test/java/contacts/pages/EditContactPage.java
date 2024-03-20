@@ -6,7 +6,9 @@ import contacts.webelements.ContactForm;
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-@DefaultUrl(BasePage.BASE_URL + "/editContact")
+import utils.AppUrls;
+
+@DefaultUrl(AppUrls.BASE_URL + AppUrls.EDIT_CONTACT_URL_PATH)
 public class EditContactPage extends BasePage<EditContactPage> {
 
 	/**
@@ -35,7 +37,7 @@ public class EditContactPage extends BasePage<EditContactPage> {
 
 	@Override
 	public Boolean isOpen() {
-		return getDriver().getCurrentUrl().endsWith("/editContact");
+		return getDriver().getCurrentUrl().endsWith(AppUrls.EDIT_CONTACT_URL_PATH);
 	}
 
 	/**

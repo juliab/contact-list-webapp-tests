@@ -3,6 +3,7 @@ package contacts.service;
 import contacts.model.User;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
+import utils.AppUrls;
 
 import static io.restassured.RestAssured.*;
 
@@ -15,8 +16,6 @@ import org.apache.http.HttpStatus;
  */
 public class UserService {
 
-	public final static String BASE_URL = "https://thinking-tester-contact-list.herokuapp.com";
-
 	/**
 	 * Adds a new user to the system.
 	 * 
@@ -26,8 +25,8 @@ public class UserService {
 	public void addUser(User user) throws HttpException {
 
 		// Set base URI and path for the user creation endpoint
-		baseURI = BASE_URL;
-		basePath = "/users";
+		baseURI = AppUrls.BASE_URL;
+		basePath = AppUrls.ADD_USER_URL_PATH;
 
 		// Send a POST request to create the user
 		Response response = given().contentType("application/json").body(user).when().post();
@@ -59,8 +58,8 @@ public class UserService {
 		}
 
 		// Set base URI and path for the user deletion endpoint
-		baseURI = BASE_URL;
-		basePath = "/users/me";
+		baseURI = AppUrls.BASE_URL;
+		basePath = AppUrls.DELETE_USER_URL_PATH;
 
 		// Send a DELETE request to delete the user
 		Response response = given().contentType("application/json")
