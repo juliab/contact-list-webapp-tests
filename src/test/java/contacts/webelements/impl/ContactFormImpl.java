@@ -65,7 +65,7 @@ public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 	}
 
 	private void fillFieldValue(WebElementFacade field, String value) {
-		if (value != null && !field.containsOnlyText(value)) {
+		if (value != null && !field.getAttribute("value").equals(value)) {
 			field.clear();
 			field.sendKeys(value);
 		}

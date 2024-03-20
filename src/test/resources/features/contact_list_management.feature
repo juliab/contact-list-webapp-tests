@@ -43,3 +43,19 @@ Scenario: Edit existing contact from the contact list
 		And I click on the "Submit" button
 		
 		Then I should see updated contact details on the page
+	
+Scenario: Try to set empty first and last name to the existing contact
+
+		Given my contact list contains one contact with the following details:
+			| First Name    | Last Name   | Date of Birth | Email                             | Phone         | Street Address 1     | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
+		  | Gertrude      | Robinson    | 1966-08-22    | GertrudeBRobinson@teleworm.us     | 303-669-1342  | 1476 Clearview Drive |                  | Denver       | CO                  | 80216          | United States |
+		And I am on the contact list page
+		
+		When I click on the contact row
+		And I click on the "Edit Contact" button
+		And I change the contact details to the following:
+			| First Name    | Last Name   | Date of Birth | Email                             | Phone         | Street Address 1     | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
+		  |               |             | 1966-08-22    | GertrudeBRobinson@teleworm.us     | 303-669-1342  | 1476 Clearview Drive |                  | Denver       | CO                  | 80216          | United States |
+		And I click on the "Submit" button
+		
+		Then I should see a validation message: "Validation failed: lastName: Path `lastName` is required., firstName: Path `firstName` is required."

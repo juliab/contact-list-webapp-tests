@@ -10,8 +10,8 @@ import java.util.Optional;
  * are optional.
  */
 public class Contact {
-	private String firstName;
-	private String lastName;
+	private Optional<String> firstName;
+	private Optional<String> lastName;
 	private Optional<String> birthdate;
 	private Optional<String> email;
 	private Optional<String> phone;
@@ -29,8 +29,8 @@ public class Contact {
 	 * @param lastName  The last name of the contact.
 	 */
 	public Contact(String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.firstName = Optional.of(firstName);
+		this.lastName = Optional.of(lastName);
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class Contact {
 	 */
 	public Contact(String firstName, String lastName, String dob, String email, String phone, String address1,
 			String address2, String city, String stateOrProvince, String postalCode, String country) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.firstName = Optional.of(firstName);
+		this.lastName = Optional.of(lastName);
 		this.birthdate = Optional.of(dob);
 		this.email = Optional.of(email.toLowerCase());
 		this.phone = Optional.of(phone);
@@ -78,7 +78,7 @@ public class Contact {
 	 * @param postalCode      The postal code of the contact's address.
 	 * @param country         The country of the contact's address.
 	 */
-	public Contact(String firstName, String lastName, Optional<String> dob, Optional<String> email,
+	public Contact(Optional<String> firstName, Optional<String> lastName, Optional<String> dob, Optional<String> email,
 			Optional<String> phone, Optional<String> address1, Optional<String> address2, Optional<String> city,
 			Optional<String> stateOrProvince, Optional<String> postalCode, Optional<String> country) {
 		this.firstName = firstName;
@@ -101,6 +101,8 @@ public class Contact {
 	 * @return A new Contact object created from the provided data.
 	 */
 	public static Contact fromMap(Map<String, String> data) {
+		Optional<String> firstName = Optional.ofNullable(data.get("First Name"));
+		Optional<String> lastName = Optional.ofNullable(data.get("Last Name"));
 		Optional<String> dob = Optional.ofNullable(data.get("Date of Birth"));
 		Optional<String> email = Optional.ofNullable(data.get("Email").toLowerCase());
 		Optional<String> phone = Optional.ofNullable(data.get("Phone"));
@@ -111,8 +113,8 @@ public class Contact {
 		Optional<String> postalCode = Optional.ofNullable(data.get("Postal Code"));
 		Optional<String> country = Optional.ofNullable(data.get("Country"));
 
-		return new Contact(data.get("First Name"), data.get("Last Name"), dob, email, phone, address1, address2, city,
-				stateOrProvince, postalCode, country);
+		return new Contact(firstName, lastName, dob, email, phone, address1, address2, city, stateOrProvince,
+				postalCode, country);
 	}
 
 	/**
@@ -121,7 +123,7 @@ public class Contact {
 	 * @return The first name of the contact.
 	 */
 	public String getFirstName() {
-		return firstName;
+		return firstName.orElse("");
 	}
 
 	/**
@@ -130,7 +132,7 @@ public class Contact {
 	 * @return The last name of the contact.
 	 */
 	public String getLastName() {
-		return lastName;
+		return lastName.orElse("");
 	}
 
 	/**
@@ -218,9 +220,9 @@ public class Contact {
 	public String toString() {
 		return "Contact{" + "firstName='" + getFirstName() + '\'' + ", lastName='" + getLastName() + '\'' + ", dob='"
 				+ getBirthdate() + '\'' + ", email='" + getEmail() + '\'' + ", phone='" + getPhone() + '\''
-				+ ", address1='" + getStreet1() + '\'' + ", address2='" + getStreet2() + '\'' + ", city='"
-				+ getCity() + '\'' + ", stateOrProvince='" + getStateProvince() + '\'' + ", postalCode='"
-				+ getPostalCode() + '\'' + ", country='" + getCountry() + '\'' + '}';
+				+ ", address1='" + getStreet1() + '\'' + ", address2='" + getStreet2() + '\'' + ", city='" + getCity()
+				+ '\'' + ", stateOrProvince='" + getStateProvince() + '\'' + ", postalCode='" + getPostalCode() + '\''
+				+ ", country='" + getCountry() + '\'' + '}';
 	}
 
 	@Override

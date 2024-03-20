@@ -117,7 +117,7 @@ public class ContactManagementStepDefinitions {
 	@When("^I change the contact details to the following:$")
 	public void iChangeTheContactDetailsToTheFollowing(Contact contact) {
 		this.contact = contact;
-
+		
 		assertTrue(editContactPage.isOpen(), editContactPage.getTitle() + " page did not open");
 		editContactPage.getContactForm().fillContactDetails(contact);
 	}
