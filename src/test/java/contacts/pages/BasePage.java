@@ -29,7 +29,7 @@ public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 	 * 
 	 * @return The title of the current page.
 	 */
-	protected abstract String pageTitle();
+	protected abstract String getPageTitle();
 
 	/**
 	 * Checks if the current page is open by comparing its title with the expected
@@ -38,7 +38,7 @@ public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 	 * @return True if the current page is open, otherwise false.
 	 */
 	public Boolean isOpen() {
-		return getTitle().equals(pageTitle());
+		return getTitle().equals(getPageTitle());
 	}
 
 	/**

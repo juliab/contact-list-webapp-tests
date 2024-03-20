@@ -19,13 +19,13 @@ public class MainPage extends BasePage<MainPage> {
 	public static final String PAGE_TITLE = "Contact List App";
 
 	@FindBy(id = "email")
-	WebElementFacade emailField;
+	private WebElementFacade emailField;
 
 	@FindBy(id = "password")
-	WebElementFacade passwordField;
+	private WebElementFacade passwordField;
 
 	@FindBy(id = "submit")
-	WebElementFacade submitButton;
+	private WebElementFacade submitButton;
 
 	/**
 	 * Returns the expected title of the main page.
@@ -33,7 +33,7 @@ public class MainPage extends BasePage<MainPage> {
 	 * @return The title of the main page.
 	 */
 	@Override
-	protected String pageTitle() {
+	protected String getPageTitle() {
 		return PAGE_TITLE;
 	}
 

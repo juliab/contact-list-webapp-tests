@@ -28,7 +28,7 @@ public class ContactListPage extends BasePage<ContactListPage> {
 
 	// Inner class to represent contact data information that can be read from the
 	// contact list.
-	class ContactData {
+	private class ContactData {
 		private String name;
 		private String birthdate;
 		private String email;
@@ -75,16 +75,16 @@ public class ContactListPage extends BasePage<ContactListPage> {
 		}
 	}
 
-	public final static By TABLE_CELL_LOCATOR = By.cssSelector("td");
+	private By tableCellLocator = By.cssSelector("td");
 
 	@FindBy(id = "add-contact")
-	WebElementFacade addContactButton;
+	private WebElementFacade addContactButton;
 
 	@FindBy(css = ".contactTable .contactTableBodyRow")
-	List<WebElementFacade> contactsTableRows;
+	private List<WebElementFacade> contactsTableRows;
 
 	@FindBy(id = "logout")
-	WebElementFacade logoutButton;
+	private WebElementFacade logoutButton;
 
 	/**
 	 * Clicks on the "Add a New Contact" button.
@@ -125,7 +125,7 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	}
 
 	private ContactData readContactData(WebElementFacade row) {
-		List<WebElementFacade> dataCells = row.thenFindAll(TABLE_CELL_LOCATOR);
+		List<WebElementFacade> dataCells = row.thenFindAll(tableCellLocator);
 
 		if (dataCells.size() != 8) {
 			throw new RuntimeException("Unable to read contact data from provided table row element");
@@ -169,7 +169,7 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	 * @return The title of the page.
 	 */
 	@Override
-	protected String pageTitle() {
+	protected String getPageTitle() {
 		return PAGE_TITLE;
 	}
 

@@ -16,19 +16,19 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	/**
 	 * The title of the page.
 	 */
-	public static final String PAGE_TITLE = "Add Contact";
+	private static final String PAGE_TITLE = "Add Contact";
 
 	@FindBy(id = "add-contact")
-	public ContactForm contactForm;
+	private ContactForm contactForm;
 
 	@FindBy(id = "submit")
-	WebElementFacade submitButton;
+	private WebElementFacade submitButton;
 
 	@FindBy(id = "error")
-	WebElementFacade errorMessage;
+	private WebElementFacade errorMessage;
 
 	@Override
-	protected String pageTitle() {
+	protected String getPageTitle() {
 		return PAGE_TITLE;
 	}
 
@@ -54,5 +54,14 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	 */
 	public String readErrorMessage() {
 		return errorMessage.getText();
+	}
+	
+	/**
+	 * Gets contact form widget object.
+	 * 
+	 * @return Contact form widget object.
+	 */
+	public ContactForm getContactForm() {
+		return contactForm;
 	}
 }

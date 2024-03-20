@@ -19,43 +19,43 @@ public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 	public static final String PAGE_TITLE = "";
 
 	@FindBy(id = "edit-contact")
-	WebElementFacade editContactButton;
+	private WebElementFacade editContactButton;
 
 	@FindBy(id = "delete")
-	WebElementFacade deleteContactButton;
+	private WebElementFacade deleteContactButton;
 
 	@FindBy(id = "firstName")
-	WebElementFacade firstNameLabel;
+	private WebElementFacade firstNameLabel;
 
 	@FindBy(id = "lastName")
-	WebElementFacade lastNameLabel;
+	private WebElementFacade lastNameLabel;
 
 	@FindBy(id = "birthdate")
-	WebElementFacade dateOfBirthLabel;
+	private WebElementFacade dateOfBirthLabel;
 
 	@FindBy(id = "email")
-	WebElementFacade emailLabel;
+	private WebElementFacade emailLabel;
 
 	@FindBy(id = "phone")
-	WebElementFacade phoneLabel;
+	private WebElementFacade phoneLabel;
 
 	@FindBy(id = "street1")
-	WebElementFacade street1Label;
+	private WebElementFacade street1Label;
 
 	@FindBy(id = "street2")
-	WebElementFacade street2Label;
+	private WebElementFacade street2Label;
 
 	@FindBy(id = "city")
-	WebElementFacade cityLabel;
+	private WebElementFacade cityLabel;
 
 	@FindBy(id = "stateProvince")
-	WebElementFacade stateOrProvinceLabel;
+	private WebElementFacade stateOrProvinceLabel;
 
 	@FindBy(id = "postalCode")
-	WebElementFacade postalCodeLabel;
+	private WebElementFacade postalCodeLabel;
 
 	@FindBy(id = "country")
-	WebElementFacade countryLabel;
+	private WebElementFacade countryLabel;
 
 	@Override
 	protected ContactDetailsPage self() {
@@ -63,7 +63,7 @@ public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 	}
 
 	@Override
-	protected String pageTitle() {
+	protected String getPageTitle() {
 		return PAGE_TITLE;
 	}
 

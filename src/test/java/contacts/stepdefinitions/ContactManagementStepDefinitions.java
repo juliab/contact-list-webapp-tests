@@ -62,7 +62,8 @@ public class ContactManagementStepDefinitions {
 		this.contact = contact;
 
 		contactListPage.clickAddNewContactButton();
-		addContactPage.contactForm.fillContactDetails(contact);
+		addContactPage.getContactForm()
+			.fillContactDetails(contact);
 		addContactPage.clickSubmitButton();
 		contactListPage.waitForLoad();
 	}
@@ -77,7 +78,8 @@ public class ContactManagementStepDefinitions {
 		this.contact = contact;
 
 		assertTrue(addContactPage.isOpen(), addContactPage.getTitle() + " page did not open");
-		addContactPage.contactForm.fillContactDetails(contact);
+		addContactPage.getContactForm()
+			.fillContactDetails(contact);
 	}
 
 	@When("^I click on the \"Submit\" button$")
@@ -120,7 +122,8 @@ public class ContactManagementStepDefinitions {
 		this.contact = contact;
 
 		assertTrue(editContactPage.isOpen(), editContactPage.getTitle() + " page did not open");
-		editContactPage.contactForm.fillContactDetails(contact);
+		editContactPage.getContactForm()
+			.fillContactDetails(contact);
 	}
 
 	@After
