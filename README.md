@@ -11,9 +11,9 @@ This repository contains automated Behavior-Driven Development tests for a [Cont
 ## Getting Started
 To run the automated tests locally, ensure you have the following prerequisites installed:
 
-Java Development Kit (JDK)
-Maven
-Chrome web browser
+- Java Development Kit (JDK)
+- Maven
+- Chrome web browser
 
 Clone this repository to your local machine using:
 
