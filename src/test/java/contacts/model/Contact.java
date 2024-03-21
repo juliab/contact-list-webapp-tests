@@ -1,14 +1,15 @@
+/**
+ * Represents a contact with various details such as name, date of birth, email,
+ * address, etc. First and last name fields are mandatory, while other details
+ * are optional.
+ */
+
 package contacts.model;
 
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * Represents a contact with various details such as name, date of birth, email,
- * address, etc. First and last name fields are mandatory, while other details
- * are optional.
- */
 public class Contact {
 	private Optional<String> firstName;
 	private Optional<String> lastName;

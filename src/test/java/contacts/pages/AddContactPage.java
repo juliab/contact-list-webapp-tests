@@ -1,3 +1,8 @@
+/**
+ * Page Object class representing the "Add Contact" page in the application.
+ * This page allows users to add a new contact by filling in their details.
+ */
+
 package contacts.pages;
 
 import contacts.webelements.ContactForm;
@@ -7,16 +12,9 @@ import net.serenitybdd.core.pages.WebElementFacade;
 
 import org.openqa.selenium.support.FindBy;
 
-/**
- * Page Object class representing the "Add Contact" page in the application.
- * This page allows users to add a new contact by filling in their details.
- */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.ADD_CONTACT_WEB_PATH)
 public class AddContactPage extends BasePage<AddContactPage> {
 
-	/**
-	 * The title of the page.
-	 */
 	private static final String PAGE_TITLE = "Add Contact";
 
 	@FindBy(id = "add-contact")
@@ -56,7 +54,7 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	public String readErrorMessage() {
 		return errorMessage.getText();
 	}
-	
+
 	/**
 	 * Gets contact form widget object.
 	 * 

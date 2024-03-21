@@ -1,3 +1,8 @@
+/**
+ * Page Object class representing the "Contact Details" page in the application.
+ * This page contains contact details and allows user to edit or delete contact.
+ */
+
 package contacts.pages;
 
 import org.openqa.selenium.support.FindBy;
@@ -7,16 +12,9 @@ import utils.AppUrls;
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-/**
- * Page Object class representing the "Contact Details" page in the application.
- * This page contains contact details and allows user to edit or delete contact.
- */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_DETAILS_WEB_PATH)
 public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 
-	/**
-	 * The title of the page.
-	 */
 	public static final String PAGE_TITLE = "";
 
 	@FindBy(id = "edit-contact")
@@ -79,7 +77,7 @@ public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 	public void clickEditContactButton() {
 		editContactButton.click();
 	}
-	
+
 	/**
 	 * Clicks on "Delete Contact" button.
 	 */

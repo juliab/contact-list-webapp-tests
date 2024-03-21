@@ -1,10 +1,11 @@
+/**
+ * Utility class for logging information to Serenity reports.
+ */
+
 package utils;
 
 import net.serenitybdd.core.Serenity;
 
-/**
- * Utility class for logging information to Serenity reports.
- */
 public class Logger {
 
 	/**

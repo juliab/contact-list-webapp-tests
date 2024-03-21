@@ -1,3 +1,8 @@
+/**
+ * This class represents the page object for the "Edit Contact" page.
+ * It provides methods to interact with the elements on this page.
+ */
+
 package contacts.pages;
 
 import org.openqa.selenium.support.FindBy;
@@ -11,9 +16,6 @@ import utils.AppUrls;
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.EDIT_CONTACT_WEB_PATH)
 public class EditContactPage extends BasePage<EditContactPage> {
 
-	/**
-	 * The title of the page.
-	 */
 	public static final String PAGE_TITLE = "";
 
 	@FindBy(id = "edit-contact")
@@ -58,7 +60,7 @@ public class EditContactPage extends BasePage<EditContactPage> {
 	public String readErrorMessage() {
 		return errorMessage.getText();
 	}
-	
+
 	/**
 	 * Gets contact form widget object.
 	 * 

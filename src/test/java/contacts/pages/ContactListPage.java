@@ -1,3 +1,9 @@
+/**
+ * Page object representing the Contact List page in the application under test.
+ * This page displays a list of contacts and provides functionality to interact
+ * with them.
+ */
+
 package contacts.pages;
 
 import java.util.List;
@@ -12,17 +18,9 @@ import org.openqa.selenium.support.FindBy;
 import contacts.model.Contact;
 import utils.AppUrls;
 
-/**
- * Page object representing the Contact List page in the application under test.
- * This page displays a list of contacts and provides functionality to interact
- * with them.
- */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_LIST_WEB_PATH)
 public class ContactListPage extends BasePage<ContactListPage> {
 
-	/**
-	 * The title of the page.
-	 */
 	public static final String PAGE_TITLE = "My Contacts";
 
 	// Inner class to represent contact data information that can be read from the
@@ -190,12 +188,17 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	 * must match the details in the contact list.
 	 * 
 	 * @param contact The Contact object representing the contact to be clicked.
-	 * @throws RuntimeException if the contact is not found in the contact list table.
+	 * @throws RuntimeException if the contact is not found in the contact list
+	 *                          table.
 	 */
 	public void clickOnContactRow(Contact contact) {
 		WebElementFacade foundRecord = contactsTableRows.stream()
-				.filter((row) -> readContactData(row).equals(contactToTableData(contact))).findAny()
-				.orElseThrow(() -> new RuntimeException("Contact " + contact + " was not found in the contact list table"));
+				.filter((row) -> readContactData(row).equals(contactToTableData(contact))).findAny().orElseThrow(
+						() -> new RuntimeException("Contact " + contact + " was not found in the contact list table"));
 		foundRecord.click();
+	}
+
+	public Boolean isLogoutButtonVisible() {
+		return logoutButton.isVisible();
 	}
 }

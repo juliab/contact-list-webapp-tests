@@ -1,3 +1,8 @@
+/**
+ * Service class for interacting with contact-related endpoints of the contact
+ * list application.
+ */
+
 package contacts.service;
 
 import static io.restassured.RestAssured.basePath;
@@ -13,10 +18,6 @@ import io.restassured.response.Response;
 import io.restassured.response.ResponseBody;
 import utils.AppUrls;
 
-/**
- * Service class for interacting with contact-related endpoints of the contact
- * list application.
- */
 public class ContactService {
 
 	/**
@@ -39,15 +40,15 @@ public class ContactService {
 						"Bearer " + user.getToken().orElseThrow(
 								() -> new HttpException("User must have a token for the contact to be added")))
 				.body(contact).post();
-				
+
 		int statusCode = response.statusCode();
-		
+
 		ResponseBody<?> body = response.body();
 
 		// Check if user creation was successful
 		if (statusCode != HttpStatus.SC_CREATED) {
-			throw new HttpException(
-					"Could not create contact. Status code: " + statusCode + ". Response body: " + body.asPrettyString());
+			throw new HttpException("Could not create contact. Status code: " + statusCode + ". Response body: "
+					+ body.asPrettyString());
 		}
 	}
 }

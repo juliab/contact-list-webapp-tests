@@ -1,3 +1,8 @@
+/**
+ * Service class for interacting with user-related endpoints of the contact list
+ * application.
+ */
+
 package contacts.service;
 
 import contacts.model.User;
@@ -10,10 +15,6 @@ import static io.restassured.RestAssured.*;
 import org.apache.http.HttpException;
 import org.apache.http.HttpStatus;
 
-/**
- * Service class for interacting with user-related endpoints of the contact list
- * application.
- */
 public class UserService {
 
 	/**
@@ -38,6 +39,35 @@ public class UserService {
 		if (statusCode != HttpStatus.SC_CREATED) {
 			throw new HttpException(
 					"Could not create user. Status code: " + statusCode + ". Response body: " + body.asPrettyString());
+		}
+
+		// Extract and set the user token from the response
+		String userToken = body.jsonPath().get("token").toString();
+		user.setToken(userToken);
+	}
+
+	/**
+	 * Logs in the user to the system.
+	 * 
+	 * @param user The user object containing the details of the user.
+	 * @throws HttpException If an error occurs while logging in.
+	 */
+	public void loginUser(User user) throws HttpException {
+
+		// Set base URI and path for the user creation endpoint
+		baseURI = AppUrls.BASE_URL;
+		basePath = AppUrls.USER_LOGIN_SERVICE_PATH;
+
+		// Send a POST request to log user in
+		Response response = given().contentType("application/json").body(user).when().post();
+
+		int statusCode = response.statusCode();
+		ResponseBody<?> body = response.body();
+
+		// Check if user creation was successful
+		if (statusCode != HttpStatus.SC_OK) {
+			throw new HttpException(
+					"Could not log in. Status code: " + statusCode + ". Response body: " + body.asPrettyString());
 		}
 
 		// Extract and set the user token from the response

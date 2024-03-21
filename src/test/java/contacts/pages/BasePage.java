@@ -1,13 +1,14 @@
-package contacts.pages;
-
-import net.serenitybdd.core.pages.PageObject;
-
 /**
  * Base class for page objects in the contact list application. Provides common
  * functionality and methods shared among page objects.
  * 
  * @param <T> The type of the page object extending BasePage.
  */
+
+package contacts.pages;
+
+import net.serenitybdd.core.pages.PageObject;
+
 public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 
 	/**
@@ -55,7 +56,7 @@ public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 		waitFor((d) -> self().isOpen());
 		return self();
 	}
-	
+
 	/**
 	 * Accepts the currently displayed alert dialog.
 	 * 

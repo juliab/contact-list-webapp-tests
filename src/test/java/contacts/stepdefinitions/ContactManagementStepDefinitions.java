@@ -30,7 +30,7 @@ import contacts.service.ContactService;
 import contacts.service.UserService;
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = "src/test/resources/features")
+@CucumberOptions(features = "src/test/resources/features/contact_list_management.feature")
 public class ContactManagementStepDefinitions {
 
 	private MainPage mainPage;
@@ -42,14 +42,14 @@ public class ContactManagementStepDefinitions {
 	private UserService userService = new UserService();
 	private ContactService contactService = new ContactService();
 	private Contact contact;
-	private User user = User.generate();
+	private User user = User.generateTestUser();
 
 	@DataTableType
 	public Contact contactEntry(Map<String, String> entry) {
 		return Contact.fromMap(entry);
 	}
 
-	@Before
+	@Before(value = "@Contacts")
 	public void registerUser() throws HttpException {
 		userService.addUser(user);
 		Logger.logUserInfo(user.toString());
@@ -63,7 +63,7 @@ public class ContactManagementStepDefinitions {
 	@Given("^my contact list contains one contact with the following details:$")
 	public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
 		this.contact = contact;
-		
+
 		contactService.addContact(user, contact);
 	}
 
@@ -72,17 +72,22 @@ public class ContactManagementStepDefinitions {
 		contactListPage.clickAddNewContactButton();
 	}
 
-	@When("^I fill in the following details:$")
-	public void iFillInTheFollowingDetails(Contact contact) {
+	@When("^I fill in the following contact details:$")
+	public void iFillInTheFollowingContactDetails(Contact contact) {
 		this.contact = contact;
 
 		assertTrue(addContactPage.isOpen(), addContactPage.getTitle() + " page did not open");
 		addContactPage.getContactForm().fillContactDetails(contact);
 	}
 
-	@When("^I click on the \"Submit\" button$")
-	public void iClickOnSubmitButton() {
+	@When("^I click on the \"Submit\" button to add a contact$")
+	public void iClickOnSubmitButtonToAddContact() {
 		addContactPage.clickSubmitButton();
+	}
+
+	@When("^I click on the \"Submit\" button to edit a contact$")
+	public void iClickOnSubmitButtonToEditContact() {
+		editContactPage.clickSubmitButton();
 	}
 
 	@When("^I click on the contact row$")
@@ -109,16 +114,16 @@ public class ContactManagementStepDefinitions {
 		String actualMessage = addContactPage.readErrorMessage();
 		assertEquals(expectedValidationMessage, actualMessage);
 	}
-	
+
 	@Then("I should not see the deleted contact in my contact list")
 	public void iShouldNotSeeDeletedContactInMyContactList() {
 		assertFalse(contactListPage.containsContact(contact), "Deleted contact is still in the contact list");
 	}
-	
+
 	@Then("I should return to a Contact List page")
 	public void iShouldReturnToContactListPage() {
 		contactListPage.waitForLoad();
-		
+
 		assertTrue(contactListPage.isOpen(), contactListPage.getTitle() + " page did not open");
 	}
 
@@ -131,21 +136,21 @@ public class ContactManagementStepDefinitions {
 	public void iClickOnDeleteContactButton() {
 		contactDetailsPage.waitForLoad().clickDeleteContactButton();
 	}
-	
+
 	@When("^I accept the confirmation dialog$")
 	public void iAcceptConfirmationDialog() {
 		contactDetailsPage.acceptAlert();
 	}
-	
+
 	@When("^I change the contact details to the following:$")
 	public void iChangeTheContactDetailsToTheFollowing(Contact contact) {
 		this.contact = contact;
-		
+
 		assertTrue(editContactPage.isOpen(), editContactPage.getTitle() + " page did not open");
 		editContactPage.getContactForm().fillContactDetails(contact);
 	}
 
-	@After
+	@After(value = "@Contacts")
 	public void deleteUser() {
 		try {
 			userService.deleteUser(user);

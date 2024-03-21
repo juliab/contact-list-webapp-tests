@@ -1,3 +1,8 @@
+/**
+ * This class represents the implementation of the ContactForm widget.
+ * It provides methods to interact with the contact form elements.
+ */
+
 package contacts.webelements.impl;
 
 import org.openqa.selenium.support.FindBy;
@@ -5,69 +10,78 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 
 import contacts.model.Contact;
 import contacts.webelements.ContactForm;
+import contacts.webelements.TextFormField;
 import net.serenitybdd.core.pages.PageObject;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.core.pages.WidgetObjectImpl;
 
 public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 
+	/**
+	 * Constructs a new ContactFormImpl object.
+	 *
+	 * @param page                  The PageObject to which this widget belongs.
+	 * @param locator               The ElementLocator that locates this widget on
+	 *                              the page.
+	 * @param timeoutInMilliseconds The timeout for finding elements in
+	 *                              milliseconds.
+	 */
 	public ContactFormImpl(PageObject page, ElementLocator locator, long timeoutInMilliseconds) {
 		super(page, locator, timeoutInMilliseconds);
 	}
 
 	@FindBy(id = "firstName")
-	WebElementFacade firstNameField;
+	private TextFormField firstNameField;
 
 	@FindBy(id = "lastName")
-	WebElementFacade lastNameField;
+	private TextFormField lastNameField;
 
 	@FindBy(id = "birthdate")
-	WebElementFacade dateOfBirthField;
+	private TextFormField dateOfBirthField;
 
 	@FindBy(id = "email")
-	WebElementFacade emailField;
+	private TextFormField emailField;
 
 	@FindBy(id = "phone")
-	WebElementFacade phoneField;
+	private TextFormField phoneField;
 
 	@FindBy(id = "street1")
-	WebElementFacade streetAddress1Field;
+	private TextFormField streetAddress1Field;
 
 	@FindBy(id = "street2")
-	WebElementFacade streetAddress2Field;
+	private TextFormField streetAddress2Field;
 
 	@FindBy(id = "city")
-	WebElementFacade cityField;
+	private TextFormField cityField;
 
 	@FindBy(id = "stateProvince")
-	WebElementFacade stateOrProvinceField;
+	private TextFormField stateOrProvinceField;
 
 	@FindBy(id = "postalCode")
-	WebElementFacade postalCodeField;
+	private TextFormField postalCodeField;
 
 	@FindBy(id = "country")
-	WebElementFacade countryField;
+	private TextFormField countryField;
 
+	/**
+	 * Fills the contact details into the corresponding form fields.
+	 *
+	 * @param contact The contact object containing the details to be filled.
+	 * @return The PageObject representing the page where the contact form is
+	 *         located.
+	 */
 	@Override
 	public PageObject fillContactDetails(Contact contact) {
-		fillFieldValue(firstNameField, contact.getFirstName());
-		fillFieldValue(lastNameField, contact.getLastName());
-		fillFieldValue(dateOfBirthField, contact.getBirthdate());
-		fillFieldValue(emailField, contact.getEmail());
-		fillFieldValue(phoneField, contact.getPhone());
-		fillFieldValue(streetAddress1Field, contact.getStreet1());
-		fillFieldValue(streetAddress2Field, contact.getStreet2());
-		fillFieldValue(cityField, contact.getCity());
-		fillFieldValue(stateOrProvinceField, contact.getStateProvince());
-		fillFieldValue(postalCodeField, contact.getPostalCode());
-		fillFieldValue(countryField, contact.getCountry());
+		firstNameField.fill(contact.getFirstName());
+		lastNameField.fill(contact.getLastName());
+		dateOfBirthField.fill(contact.getBirthdate());
+		emailField.fill(contact.getEmail());
+		phoneField.fill(contact.getPhone());
+		streetAddress1Field.fill(contact.getStreet1());
+		streetAddress2Field.fill(contact.getStreet2());
+		cityField.fill(contact.getCity());
+		stateOrProvinceField.fill(contact.getStateProvince());
+		postalCodeField.fill(contact.getPostalCode());
+		countryField.fill(contact.getCountry());
 		return getPage();
-	}
-
-	private void fillFieldValue(WebElementFacade field, String value) {
-		if (value != null && !field.getAttribute("value").equals(value)) {
-			field.clear();
-			field.sendKeys(value);
-		}
 	}
 }

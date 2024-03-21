@@ -1,29 +1,20 @@
-package contacts.model;
-
-import java.util.Optional;
-import java.util.UUID;
-
 /**
  * Represents a user in the application.
  */
+
+package contacts.model;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+
 public class User {
 
-	private String firstName = "";
-	private String lastName = "";
-	private String email;
-	private String password;
+	private Optional<String> firstName;
+	private Optional<String> lastName;
+	private Optional<String> email;
+	private Optional<String> password;
 	private Optional<String> token;
-
-	/**
-	 * Constructs a new user with the specified email and password.
-	 *
-	 * @param email    The email address of the user.
-	 * @param password The password of the user.
-	 */
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
-	}
 
 	/**
 	 * Constructs a new user with the specified first name, last name, email, and
@@ -35,6 +26,23 @@ public class User {
 	 * @param password  The password of the user.
 	 */
 	public User(String firstName, String lastName, String email, String password) {
+		this.firstName = Optional.of(firstName);
+		this.lastName = Optional.of(lastName);
+		this.email = Optional.of(email);
+		this.password = Optional.of(password);
+	}
+
+	/**
+	 * Constructs a new user with the specified first name, last name, email, and
+	 * password.
+	 *
+	 * @param firstName The first name of the user.
+	 * @param lastName  The last name of the user.
+	 * @param email     The email address of the user.
+	 * @param password  The password of the user.
+	 */
+	public User(Optional<String> firstName, Optional<String> lastName, Optional<String> email,
+			Optional<String> password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -47,7 +55,7 @@ public class User {
 	 * @return The first name of the user.
 	 */
 	public String getFirstName() {
-		return firstName;
+		return firstName.orElse("");
 	}
 
 	/**
@@ -56,7 +64,7 @@ public class User {
 	 * @param firstName The first name of the user.
 	 */
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = Optional.of(firstName);
 	}
 
 	/**
@@ -65,7 +73,7 @@ public class User {
 	 * @return The last name of the user.
 	 */
 	public String getLastName() {
-		return lastName;
+		return lastName.orElse("");
 	}
 
 	/**
@@ -74,7 +82,7 @@ public class User {
 	 * @param lastName The last name of the user.
 	 */
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = Optional.of(lastName);
 	}
 
 	/**
@@ -83,7 +91,7 @@ public class User {
 	 * @return The email of the user.
 	 */
 	public String getEmail() {
-		return email;
+		return email.orElse("");
 	}
 
 	/**
@@ -92,7 +100,7 @@ public class User {
 	 * @param email The email of the user.
 	 */
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = Optional.of(email);
 	}
 
 	/**
@@ -101,7 +109,7 @@ public class User {
 	 * @return The password of the user.
 	 */
 	public String getPassword() {
-		return password;
+		return password.orElse("");
 	}
 
 	/**
@@ -110,7 +118,7 @@ public class User {
 	 * @param password The password of the user.
 	 */
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Optional.of(password);
 	}
 
 	/**
@@ -131,10 +139,25 @@ public class User {
 		this.token = Optional.of(token);
 	}
 
+	/**
+	 * Creates a user object from the given map of data.
+	 *
+	 * @param data The map containing user details.
+	 * @return A new user object created from the provided data.
+	 */
+	public static User fromMap(Map<String, String> data) {
+		Optional<String> firstName = Optional.ofNullable(data.get("First Name"));
+		Optional<String> lastName = Optional.ofNullable(data.get("Last Name"));
+		Optional<String> email = Optional.ofNullable(data.get("Email").toLowerCase());
+		Optional<String> password = Optional.ofNullable(data.get("Password"));
+
+		return new User(firstName, lastName, email, password);
+	}
+
 	@Override
 	public String toString() {
-		return "User{" + "email='" + email + '\'' + ", password='" + password + '\'' + ", token='" + token.orElse("")
-				+ '\'' + '}';
+		return "User{" + "email='" + getEmail() + '\'' + ", password='" + getPassword() + '\'' + ", token='"
+				+ token.orElse("") + '\'' + '}';
 	}
 
 	/**
@@ -143,7 +166,7 @@ public class User {
 	 *
 	 * @return A new User object with random email address and password.
 	 */
-	public static User generate() {
+	public static User generateTestUser() {
 		String firstName = "Test";
 		String lastName = "User";
 		String randomEmail = "user" + UUID.randomUUID().toString() + "@example.com";
