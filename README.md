@@ -1,4 +1,10 @@
-This repository contains automated Behavior-Driven Development tests for a [Contact List Web Application](https://thinking-tester-contact-list.herokuapp.com/).
+This repository contains automated Behavior-Driven Development tests for a [Contact List Web Application](https://thinking-tester-contact-list.herokuapp.com/). 
+
+## About the Contact List Application
+
+Contact List Application is designed solely for testing purposes and does not contain any actual data. It provides users with the functionality to manage their contact lists, allowing them to create, edit, or delete contacts as needed. Authentication is required for users to access and utilize the application's features.
+
+Furthermore, the application provides an accessible [REST API](https://documenter.getpostman.com/view/4012288/TzK2bEa8) designed for testing purposes.
 
 ## Tech Stack
 - **Java**: The primary programming language for test automation.
