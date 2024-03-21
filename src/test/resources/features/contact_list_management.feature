@@ -30,7 +30,7 @@ Scenario: Try to add new contact with empty first and last name to the contact l
       |               |             | 1990-05-15    | johndoe@email.com   |           |                    |                  |              |                     |                |             |
     And I click on the "Submit" button to add a contact
     
-    Then I should see a validation message: "Contact validation failed: firstName: Path `firstName` is required., lastName: Path `lastName` is required."
+    Then I should see the error message: "Contact validation failed: firstName: Path `firstName` is required., lastName: Path `lastName` is required."
 
 @ContactsPositive
 Scenario: Edit existing contact from the contact list
@@ -64,7 +64,7 @@ Scenario: Try to set empty first and last name to the existing contact
 		  |               |             | 1966-08-22    | GertrudeBRobinson@teleworm.us     | 303-669-1342  | 1476 Clearview Drive |                  | Denver       | CO                  | 80216          | United States |
 		And I click on the "Submit" button to edit a contact
 		
-		Then I should see a validation message: "Validation failed: lastName: Path `lastName` is required., firstName: Path `firstName` is required."
+		Then I should see the error message: "Validation failed: lastName: Path `lastName` is required., firstName: Path `firstName` is required."
 
 @ContactsPositive
 Scenario: Delete a contact from the contact list

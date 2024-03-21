@@ -96,7 +96,7 @@ public class ContactListPage extends BasePage<ContactListPage> {
 	/**
 	 * Logs out of the application by clicking on the logout button.
 	 */
-	public void logout() {
+	public void clickLogoutButton() {
 		logoutButton.click();
 	}
 

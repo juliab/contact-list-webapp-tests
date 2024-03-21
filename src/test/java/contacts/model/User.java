@@ -8,14 +8,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
 
 	private Optional<String> firstName;
 	private Optional<String> lastName;
 	private Optional<String> email;
 	private Optional<String> password;
-	private Optional<String> token;
-
+	@JsonIgnore private Optional<String> token;
+	
 	/**
 	 * Constructs a new user with the specified first name, last name, email, and
 	 * password.

@@ -30,9 +30,6 @@ public class AddUserPage extends BasePage<AddUserPage> {
 	@FindBy(id = "password")
 	private TextFormField passwordField;
 
-	@FindBy(id = "error")
-	private WebElementFacade errorMessage;
-
 	@FindBy(id = "submit")
 	private WebElementFacade submitButton;
 
@@ -68,14 +65,5 @@ public class AddUserPage extends BasePage<AddUserPage> {
 	public AddUserPage clickSubmitButton() {
 		submitButton.click();
 		return this;
-	}
-
-	/**
-	 * Reads the error message displayed on the page.
-	 * 
-	 * @return The text of the error message.
-	 */
-	public String readErrorMessage() {
-		return errorMessage.getText();
 	}
 }

@@ -7,9 +7,15 @@
 
 package contacts.pages;
 
+import org.openqa.selenium.support.FindBy;
+
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 
 public abstract class BasePage<T extends BasePage<T>> extends PageObject {
+	
+	@FindBy(id = "error")
+	protected WebElementFacade errorMessage;
 
 	/**
 	 * Abstract method to return the instance of the current page. Each subclass
@@ -65,5 +71,15 @@ public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 	public T acceptAlert() {
 		getAlert().accept();
 		return self();
+	}
+	
+
+	/**
+	 * Reads error message on the page.
+	 * 
+	 * @return Error message text.
+	 */
+	public String readErrorMessage() {
+		return errorMessage.getText();
 	}
 }

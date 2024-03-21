@@ -24,9 +24,6 @@ public class EditContactPage extends BasePage<EditContactPage> {
 	@FindBy(id = "submit")
 	private WebElementFacade submitButton;
 
-	@FindBy(id = "error")
-	private WebElementFacade errorMessage;
-
 	@Override
 	protected EditContactPage self() {
 		return this;
@@ -50,15 +47,6 @@ public class EditContactPage extends BasePage<EditContactPage> {
 	public EditContactPage clickSubmitButton() {
 		submitButton.click();
 		return this;
-	}
-
-	/**
-	 * Reads error message on the page.
-	 * 
-	 * @return Error message text.
-	 */
-	public String readErrorMessage() {
-		return errorMessage.getText();
 	}
 
 	/**

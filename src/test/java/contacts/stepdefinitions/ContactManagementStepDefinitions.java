@@ -43,7 +43,7 @@ public class ContactManagementStepDefinitions {
 	private ContactService contactService = new ContactService();
 	private Contact contact;
 	private User user = User.generateTestUser();
-
+	
 	@DataTableType
 	public Contact contactEntry(Map<String, String> entry) {
 		return Contact.fromMap(entry);
@@ -55,24 +55,24 @@ public class ContactManagementStepDefinitions {
 		Logger.logUserInfo(user.toString());
 	}
 
-	@Given("^I am on the contact list page$")
+	@Given("I am on the contact list page")
 	public void iAmOnTheContactListPage() {
 		mainPage.navigate().login(user);
 	}
 
-	@Given("^my contact list contains one contact with the following details:$")
+	@Given("my contact list contains one contact with the following details:")
 	public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
 		this.contact = contact;
 
 		contactService.addContact(user, contact);
 	}
 
-	@When("^I click on the \"Add a New Contact\" button$")
+	@When("I click on the \"Add a New Contact\" button")
 	public void iClickOnAddNewContactButton() {
 		contactListPage.clickAddNewContactButton();
 	}
 
-	@When("^I fill in the following contact details:$")
+	@When("I fill in the following contact details:")
 	public void iFillInTheFollowingContactDetails(Contact contact) {
 		this.contact = contact;
 
@@ -80,39 +80,33 @@ public class ContactManagementStepDefinitions {
 		addContactPage.getContactForm().fillContactDetails(contact);
 	}
 
-	@When("^I click on the \"Submit\" button to add a contact$")
+	@When("I click on the \"Submit\" button to add a contact")
 	public void iClickOnSubmitButtonToAddContact() {
 		addContactPage.clickSubmitButton();
 	}
 
-	@When("^I click on the \"Submit\" button to edit a contact$")
+	@When("I click on the \"Submit\" button to edit a contact")
 	public void iClickOnSubmitButtonToEditContact() {
 		editContactPage.clickSubmitButton();
 	}
 
-	@When("^I click on the contact row$")
+	@When("I click on the contact row")
 	public void iClickOnTheContactRow() {
 		contactListPage.clickOnContactRow(contact);
 	}
 
-	@Then("^I should see added contact in the contact list$")
+	@Then("I should see added contact in the contact list")
 	public void iShouldSeeAddedContactInTheContactList() {
 		contactListPage.waitForLoad();
 		assertTrue(contactListPage.isOpen(), contactListPage.getTitle() + " page did not open");
 		assertTrue(contactListPage.containsContact(contact), "Added contact is not in the contact list");
 	}
 
-	@Then("^I should see updated contact details on the page$")
+	@Then("I should see updated contact details on the page")
 	public void iShouldSeeUpdatedContactInTheContactList() {
 		contactDetailsPage.waitForLoad();
 		assertTrue(contactDetailsPage.isOpen(), contactDetailsPage.getTitle() + " page did not open");
 		assertEquals(contact, contactDetailsPage.readContactDetails(), "Contact details were not updated correctly");
-	}
-
-	@Then("I should see a validation message: {string}")
-	public void verifyValidationMessage(String expectedValidationMessage) {
-		String actualMessage = addContactPage.readErrorMessage();
-		assertEquals(expectedValidationMessage, actualMessage);
 	}
 
 	@Then("I should not see the deleted contact in my contact list")
@@ -127,22 +121,22 @@ public class ContactManagementStepDefinitions {
 		assertTrue(contactListPage.isOpen(), contactListPage.getTitle() + " page did not open");
 	}
 
-	@When("^I click on the \"Edit Contact\" button$")
+	@When("I click on the \"Edit Contact\" button")
 	public void iClickOnEditContactButton() {
 		contactDetailsPage.waitForLoad().clickEditContactButton();
 	}
 
-	@When("^I click on the \"Delete Contact\" button$")
+	@When("I click on the \"Delete Contact\" button")
 	public void iClickOnDeleteContactButton() {
 		contactDetailsPage.waitForLoad().clickDeleteContactButton();
 	}
 
-	@When("^I accept the confirmation dialog$")
+	@When("I accept the confirmation dialog")
 	public void iAcceptConfirmationDialog() {
 		contactDetailsPage.acceptAlert();
 	}
 
-	@When("^I change the contact details to the following:$")
+	@When("I change the contact details to the following:")
 	public void iChangeTheContactDetailsToTheFollowing(Contact contact) {
 		this.contact = contact;
 

@@ -23,9 +23,6 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	@FindBy(id = "submit")
 	private WebElementFacade submitButton;
 
-	@FindBy(id = "error")
-	private WebElementFacade errorMessage;
-
 	@Override
 	protected String getPageTitle() {
 		return PAGE_TITLE;
@@ -44,15 +41,6 @@ public class AddContactPage extends BasePage<AddContactPage> {
 	public AddContactPage clickSubmitButton() {
 		submitButton.click();
 		return this;
-	}
-
-	/**
-	 * Reads error message on the page.
-	 * 
-	 * @return Error message text.
-	 */
-	public String readErrorMessage() {
-		return errorMessage.getText();
 	}
 
 	/**

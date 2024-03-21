@@ -18,7 +18,7 @@ Scenario: Try to add a new user with empty First Name field
     Given I am on the Add User page
     
     When I fill in the following user details:
-      | First Name    | Last Name   | Email                    | Password       |  
+      | First Name    | Last Name   | Email                   | Password       |  
       |               | Doss        | MaryDoss@rhyta.com      | Aish4EeBee7    |
     And I click on the "Submit" button to register a user
     
@@ -30,7 +30,7 @@ Scenario: Try to add a new user with an invalid email
     Given I am on the Add User page
     
     When I fill in the following user details:
-      | First Name    | Last Name   | Email                 | Password       |  
+      | First Name    | Last Name   | Email                | Password       |  
       | Paul          | Price       | PaulPrice@rhyta      | IokuN1oh       |
     And I click on the "Submit" button to register a user
     
