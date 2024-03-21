@@ -10,6 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 import utils.Logger;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -108,12 +109,34 @@ public class ContactManagementStepDefinitions {
 		String actualMessage = addContactPage.readErrorMessage();
 		assertEquals(expectedValidationMessage, actualMessage);
 	}
+	
+	@Then("I should not see the deleted contact in my contact list")
+	public void iShouldNotSeeDeletedContactInMyContactList() {
+		assertFalse(contactListPage.containsContact(contact), "Deleted contact is still in the contact list");
+	}
+	
+	@Then("I should return to a Contact List page")
+	public void iShouldReturnToContactListPage() {
+		contactListPage.waitForLoad();
+		
+		assertTrue(contactListPage.isOpen(), contactListPage.getTitle() + " page did not open");
+	}
 
 	@When("^I click on the \"Edit Contact\" button$")
 	public void iClickOnEditContactButton() {
 		contactDetailsPage.waitForLoad().clickEditContactButton();
 	}
 
+	@When("^I click on the \"Delete Contact\" button$")
+	public void iClickOnDeleteContactButton() {
+		contactDetailsPage.waitForLoad().clickDeleteContactButton();
+	}
+	
+	@When("^I accept the confirmation dialog$")
+	public void iAcceptConfirmationDialog() {
+		contactDetailsPage.acceptAlert();
+	}
+	
 	@When("^I change the contact details to the following:$")
 	public void iChangeTheContactDetailsToTheFollowing(Contact contact) {
 		this.contact = contact;

@@ -49,10 +49,20 @@ public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 	/**
 	 * Waits until the page is loaded.
 	 * 
-	 * @return The instance of current page.
+	 * @return The instance of the current page.
 	 */
 	public T waitForLoad() {
 		waitFor((d) -> self().isOpen());
+		return self();
+	}
+	
+	/**
+	 * Accepts the currently displayed alert dialog.
+	 * 
+	 * @return An instance of the current page.
+	 */
+	public T acceptAlert() {
+		getAlert().accept();
 		return self();
 	}
 }

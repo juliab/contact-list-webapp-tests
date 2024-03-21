@@ -79,6 +79,13 @@ public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 	public void clickEditContactButton() {
 		editContactButton.click();
 	}
+	
+	/**
+	 * Clicks on "Delete Contact" button.
+	 */
+	public void clickDeleteContactButton() {
+		deleteContactButton.click();
+	}
 
 	/**
 	 * Reads contact details from the current page and creates a new Contact

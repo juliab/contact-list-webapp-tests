@@ -59,3 +59,17 @@ Scenario: Try to set empty first and last name to the existing contact
 		And I click on the "Submit" button
 		
 		Then I should see a validation message: "Validation failed: lastName: Path `lastName` is required., firstName: Path `firstName` is required."
+
+Scenario: Delete a contact from the contact list
+
+		Given my contact list contains one contact with the following details:
+			| First Name    | Last Name   | Date of Birth | Email                        | Phone         | Street Address 1     | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
+		  | Joshua        | Smith       | 1939-01-30    | JoshuaSSmith@dayrep.com      | 917-712-5808  | 1642 Hanover Street  |                  | New York     | NY                  | 10016          | United States |
+		And I am on the contact list page
+		
+		When I click on the contact row
+		And I click on the "Delete Contact" button
+		And I accept the confirmation dialog
+		
+		Then I should return to a Contact List page
+		And I should not see the deleted contact in my contact list
