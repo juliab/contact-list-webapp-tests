@@ -30,7 +30,7 @@ import contacts.service.ContactService;
 import contacts.service.UserService;
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = "src/test/resources/features/contact_list_management.feature")
+@CucumberOptions(features = "src/test/resources/features")
 public class ContactManagementStepDefinitions {
 
 	private MainPage mainPage;
@@ -39,8 +39,6 @@ public class ContactManagementStepDefinitions {
 	private ContactDetailsPage contactDetailsPage;
 	private EditContactPage editContactPage;
 
-	private UserService userService = new UserService();
-	private ContactService contactService = new ContactService();
 	private Contact contact;
 	private User user = User.generateTestUser();
 	
@@ -51,7 +49,7 @@ public class ContactManagementStepDefinitions {
 
 	@Before(value = "@Contacts")
 	public void registerUser() throws HttpException {
-		userService.addUser(user);
+		UserService.addUser(user);
 		Logger.logUserInfo(user.toString());
 	}
 
@@ -64,7 +62,7 @@ public class ContactManagementStepDefinitions {
 	public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
 		this.contact = contact;
 
-		contactService.addContact(user, contact);
+		ContactService.addContact(user, contact);
 	}
 
 	@When("I click on the \"Add a New Contact\" button")
@@ -147,7 +145,7 @@ public class ContactManagementStepDefinitions {
 	@After(value = "@Contacts")
 	public void deleteUser() {
 		try {
-			userService.deleteUser(user);
+			UserService.deleteUser(user);
 			Logger.logUserInfo("Test user successfully deleted");
 		} catch (HttpException e) {
 			Logger.logUserInfo(e.getMessage());

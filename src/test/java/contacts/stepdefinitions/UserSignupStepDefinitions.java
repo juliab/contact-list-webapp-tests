@@ -14,11 +14,10 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 import utils.Logger;
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = "src/test/resources/features/user_signup.feature")
+@CucumberOptions(features = "src/test/resources/features")
 public class UserSignupStepDefinitions {
 
 	private AddUserPage addUserPage;
-	private UserService userService = new UserService();
 	private User user;
 
 	@Given("I am on the Add User page")
@@ -41,8 +40,8 @@ public class UserSignupStepDefinitions {
 	@After(value = "@SignupPositive")
 	public void deleteUser() {
 		try {
-			userService.loginUser(user);
-			userService.deleteUser(user);
+			UserService.loginUser(user);
+			UserService.deleteUser(user);
 			Logger.logUserInfo("Test user successfully deleted");
 		} catch (HttpException e) {
 			Logger.logUserInfo(e.getMessage());

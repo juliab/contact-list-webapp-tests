@@ -23,7 +23,7 @@ public class UserService {
 	 * @param user The user object containing the details of the user to be added.
 	 * @throws HttpException If an error occurs while adding the user.
 	 */
-	public void addUser(User user) throws HttpException {
+	public static void addUser(User user) throws HttpException {
 
 		// Set base URI and path for the user creation endpoint
 		baseURI = AppUrls.BASE_URL;
@@ -52,7 +52,7 @@ public class UserService {
 	 * @param user The user object containing the details of the user.
 	 * @throws HttpException If an error occurs while logging in.
 	 */
-	public void loginUser(User user) throws HttpException {
+	public static void loginUser(User user) throws HttpException {
 
 		// Set base URI and path for the user creation endpoint
 		baseURI = AppUrls.BASE_URL;
@@ -81,7 +81,7 @@ public class UserService {
 	 * @param user The user object representing the user to be deleted.
 	 * @throws HttpException If an error occurs while deleting the user.
 	 */
-	public void deleteUser(User user) throws HttpException {
+	public static void deleteUser(User user) throws HttpException {
 
 		// Set base URI and path for the user deletion endpoint
 		baseURI = AppUrls.BASE_URL;

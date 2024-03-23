@@ -18,19 +18,17 @@ import net.serenitybdd.cucumber.CucumberWithSerenity;
 import utils.Logger;
 
 @RunWith(CucumberWithSerenity.class)
-@CucumberOptions(features = "src/test/resources/features/user_signup.feature")
+@CucumberOptions(features = "src/test/resources/features")
 public class UserAuthenticationStepDefinitions {
 
 	private MainPage mainPage;
 	private ContactListPage contactListPage;
-	private UserService userService = new UserService();
 	private User user;
 
 	@Given("I am a registered user in the application:")
 	public void iAmRegisteredUserInTheApplication(User user) throws HttpException {
 		this.user = user;
-		userService.addUser(user);
-		System.out.println("INCorrect!!!!!!!!!!!!!!!!");
+		UserService.addUser(user);
 	}
 	
 	@Given("I am not a registered user in the application:")
@@ -73,8 +71,8 @@ public class UserAuthenticationStepDefinitions {
 	@After(value = "@SigninPositive")
 	public void deleteUser() {
 		try {
-			userService.loginUser(user);
-			userService.deleteUser(user);
+			UserService.loginUser(user);
+			UserService.deleteUser(user);
 			Logger.logUserInfo("Test user successfully deleted");
 		} catch (HttpException e) {
 			Logger.logUserInfo(e.getMessage());

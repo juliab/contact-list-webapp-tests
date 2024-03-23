@@ -28,7 +28,7 @@ public class ContactService {
 	 *                added.
 	 * @throws HttpException If an error occurs while adding the contact.
 	 */
-	public void addContact(User user, Contact contact) throws HttpException {
+	public static void addContact(User user, Contact contact) throws HttpException {
 
 		// Set base URI and path for the user creation endpoint
 		baseURI = AppUrls.BASE_URL;
