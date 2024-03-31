@@ -12,7 +12,7 @@ Scenario: Successful sign in to the system
     And I click on the "Submit" button to login
     
     Then I should see a Contact List page with a Logout button
-    
+
 @SigninNegative    
 Scenario: Try to sign in with non-existing user data
     
@@ -37,4 +37,3 @@ Scenario: Successful sign out of the system
     When I click on the "Logout" button
     
     Then I should see a Main Page with the login form
-    

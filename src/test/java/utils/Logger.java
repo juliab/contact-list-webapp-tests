@@ -24,6 +24,15 @@ public class Logger {
 	 * @param info The user-related information to be logged.
 	 */
 	public static void logUserInfo(String info) {
-		Serenity.recordReportData().withTitle("User info").andContents(info);
+		log("User info", info);
+	}
+
+	/**
+	 * Logs contact information with a default title "Contact data".
+	 *
+	 * @param info The contact information to be logged.
+	 */
+	public static void logContactData(String info) {
+		log("Contact data", info);
 	}
 }
