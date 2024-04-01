@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import model.Contact;
 
+/**
+ * Represents a Contact data transfer object.
+ */
 public class ContactDto {
 
 	private Optional<String> _id;
@@ -104,6 +107,11 @@ public class ContactDto {
 		return __v.orElse("");
 	}
 
+	/**
+	 * Converts this ContactDto object to a Contact object.
+	 * 
+	 * @return the Contact object.
+	 */
 	public Contact toContact() {
 		return new Contact(firstName.orElse(""), lastName.orElse(""), birthdate.orElse(""), email.orElse(""),
 				phone.orElse(""), street1.orElse(""), street2.orElse(""), city.orElse(""),

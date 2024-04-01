@@ -18,6 +18,7 @@ import utils.Logger;
  */
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Contact {
+	
 	private Optional<String> firstName = Optional.empty();
 	private Optional<String> lastName = Optional.empty();
 	private Optional<String> birthdate = Optional.empty();

@@ -6,11 +6,15 @@ import io.restassured.response.Response;
 import model.Contact;
 import model.User;
 import service.dto.ContactDto;
+import service.dto.ContactErrorResponseDto;
+import service.dto.ContactSuccessResponseDto;
 import utils.AppUrls;
 
 import static io.restassured.RestAssured.*;
 
 import org.apache.http.HttpException;
+import org.apache.http.HttpStatus;
+import org.openqa.selenium.internal.Either;
 
 import utils.Logger;
 
@@ -25,14 +29,16 @@ public class ContactService {
 	}
 
 	/**
-	 * Adds a contact to the user's contact list.
+	 * Adds a new contact to the user's contact list.
 	 * 
 	 * @param user    the user to add the contact to
 	 * @param contact the contact to add
-	 * @return the response from the service
+	 * @return a response object containing either a success response or an error
+	 *         response
 	 * @throws HttpException if the user does not have a token
 	 */
-	public static ContactResponse add(User user, Contact contact) throws HttpException {
+	public static Either<ContactSuccessResponseDto, ContactErrorResponseDto> add(User user, Contact contact)
+			throws HttpException {
 
 		Response response = given()
 				.baseUri(AppUrls.BASE_URL)
@@ -43,8 +49,13 @@ public class ContactService {
 				.body(contact).post();
 
 		Logger.log("Rest response body", response.asPrettyString());
+		
+		if (response.statusCode() == HttpStatus.SC_CREATED) {
+			ContactDto contactDto = response.body().as(ContactDto.class);
+			return Either.left(new ContactSuccessResponseDto(response.statusCode(), contactDto));
+		}
 
-		ContactDto contactDto = response.body().as(ContactDto.class);
-		return new ContactResponse(response.statusCode(), contactDto);
+		ContactErrorResponseDto errorResponse = response.body().as(ContactErrorResponseDto.class);
+		return Either.right(errorResponse);
 	}
 }

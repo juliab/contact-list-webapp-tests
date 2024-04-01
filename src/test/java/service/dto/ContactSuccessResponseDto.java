@@ -1,17 +1,16 @@
-package service;
+package service.dto;
 
 import model.Contact;
-import service.dto.ContactDto;
 
 /**
- * Represents a response from the Contact service.
+ * Represents a successful response from the Contact service.
  */
-public class ContactResponse {
+public class ContactSuccessResponseDto {
 
 	private int statusCode;
 	private ContactDto contactDto;
 
-	public ContactResponse(int statusCode, ContactDto contactDto) {
+	public ContactSuccessResponseDto(int statusCode, ContactDto contactDto) {
 		this.statusCode = statusCode;
 		this.contactDto = contactDto;
 	}

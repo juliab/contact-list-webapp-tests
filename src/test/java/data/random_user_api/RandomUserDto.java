@@ -360,9 +360,15 @@ public class RandomUserDto {
         }
 
         public String getState() {
+            String result = state.trim();
+
             // Trim this property value to 20 characters to be compliant with the
             // application rules
-            return state.trim().substring(0, Math.min(state.length(), 20));
+            if (result.length() > 20) {
+                result = result.substring(0, 20);
+            }
+
+            return result;
         }
 
         public String getCountry() {
