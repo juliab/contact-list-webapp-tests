@@ -72,7 +72,7 @@ public class UserService {
 				.body(user)
 				.post();
 
-		Logger.log("Rest", response.asPrettyString());
+		Logger.log("Add user REST response", response.asPrettyString());
 
 		int statusCode = response.statusCode();
 		ResponseBody<?> body = response.body();
@@ -110,8 +110,6 @@ public class UserService {
 				.header(getAuthHeader(user))
 				.when()
 				.delete();
-
-		Logger.log("Rest", response.asPrettyString());
 
 		int statusCode = response.statusCode();
 		ResponseBody<?> body = response.body();

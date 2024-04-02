@@ -48,7 +48,7 @@ public class ContactService {
 				.header(getAuthHeader(user))
 				.body(contact).post();
 
-		Logger.log("Rest response body", response.asPrettyString());
+		Logger.log("Add contact REST response", response.asPrettyString());
 		
 		if (response.statusCode() == HttpStatus.SC_CREATED) {
 			ContactDto contactDto = response.body().as(ContactDto.class);

@@ -1,7 +1,3 @@
-/**
- * This interface represents Add/Edit Contact from.
- */
-
 package ui.webelements;
 
 import model.Contact;
@@ -10,6 +6,9 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WidgetObject;
 import ui.webelements.impl.ContactFormImpl;
 
+/**
+ * This interface represents Add/Edit Contact from.
+ */
 @ImplementedBy(ContactFormImpl.class)
 public interface ContactForm extends WidgetObject {
 

@@ -1,60 +1,59 @@
-/**
- * Page Object class representing the "Contact Details" page in the application.
- * This page contains contact details and allows user to edit or delete contact.
- */
-
 package ui.pages;
 
 import org.openqa.selenium.support.FindBy;
 
 import model.Contact;
 import net.serenitybdd.annotations.DefaultUrl;
-import net.serenitybdd.core.pages.WebElementFacade;
+import ui.webelements.ReadOnlyFIeld;
 import utils.AppUrls;
 
+/**
+ * Page Object class representing the "Contact Details" page in the application.
+ * This page contains contact details and allows user to edit or delete contact.
+ */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_DETAILS_WEB_PATH)
 public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 
 	public static final String PAGE_TITLE = "";
 
 	@FindBy(id = "edit-contact")
-	private WebElementFacade editContactButton;
+	private ReadOnlyFIeld editContactButton;
 
 	@FindBy(id = "delete")
-	private WebElementFacade deleteContactButton;
+	private ReadOnlyFIeld deleteContactButton;
 
 	@FindBy(id = "firstName")
-	private WebElementFacade firstNameLabel;
+	private ReadOnlyFIeld firstNameData;
 
 	@FindBy(id = "lastName")
-	private WebElementFacade lastNameLabel;
+	private ReadOnlyFIeld lastNameData;
 
 	@FindBy(id = "birthdate")
-	private WebElementFacade dateOfBirthLabel;
+	private ReadOnlyFIeld dateOfBirthData;
 
 	@FindBy(id = "email")
-	private WebElementFacade emailLabel;
+	private ReadOnlyFIeld emailData;
 
 	@FindBy(id = "phone")
-	private WebElementFacade phoneLabel;
+	private ReadOnlyFIeld phoneData;
 
 	@FindBy(id = "street1")
-	private WebElementFacade street1Label;
+	private ReadOnlyFIeld street1Data;
 
 	@FindBy(id = "street2")
-	private WebElementFacade street2Label;
+	private ReadOnlyFIeld street2Data;
 
 	@FindBy(id = "city")
-	private WebElementFacade cityLabel;
+	private ReadOnlyFIeld cityData;
 
 	@FindBy(id = "stateProvince")
-	private WebElementFacade stateOrProvinceLabel;
+	private ReadOnlyFIeld stateOrProvinceData;
 
 	@FindBy(id = "postalCode")
-	private WebElementFacade postalCodeLabel;
+	private ReadOnlyFIeld postalCodeData;
 
 	@FindBy(id = "country")
-	private WebElementFacade countryLabel;
+	private ReadOnlyFIeld countryData;
 
 	@Override
 	protected ContactDetailsPage self() {
@@ -92,17 +91,17 @@ public class ContactDetailsPage extends BasePage<ContactDetailsPage> {
 	 * @return A Contact instance populated with the read contact details.
 	 */
 	public Contact readContactDetails() {
-		String firstName = firstNameLabel.getText();
-		String lastName = lastNameLabel.getText();
-		String dateOfBirth = dateOfBirthLabel.getText();
-		String email = emailLabel.getText();
-		String phone = phoneLabel.getText();
-		String address1 = street1Label.getText();
-		String address2 = street2Label.getText();
-		String city = cityLabel.getText();
-		String stateOrProvince = stateOrProvinceLabel.getText();
-		String postalCode = postalCodeLabel.getText();
-		String country = countryLabel.getText();
+		String firstName = firstNameData.read();
+		String lastName = lastNameData.read();
+		String dateOfBirth = dateOfBirthData.read();
+		String email = emailData.read();
+		String phone = phoneData.read();
+		String address1 = street1Data.read();
+		String address2 = street2Data.read();
+		String city = cityData.read();
+		String stateOrProvince = stateOrProvinceData.read();
+		String postalCode = postalCodeData.read();
+		String country = countryData.read();
 
 		return new Contact(firstName, lastName, dateOfBirth, email, phone, address1, address2, city, stateOrProvince,
 				postalCode, country);

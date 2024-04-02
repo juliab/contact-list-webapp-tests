@@ -1,8 +1,3 @@
-/**
- * This class represents the page object for the "Edit Contact" page.
- * It provides methods to interact with the elements on this page.
- */
-
 package ui.pages;
 
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +7,10 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import ui.webelements.ContactForm;
 import utils.AppUrls;
 
+/**
+ * This class represents the page object for the "Edit Contact" page.
+ * It provides methods to interact with the elements on this page.
+ */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.EDIT_CONTACT_WEB_PATH)
 public class EditContactPage extends BasePage<EditContactPage> {
 

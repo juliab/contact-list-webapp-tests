@@ -1,10 +1,3 @@
-/**
- * Base class for page objects in the contact list application. Provides common
- * functionality and methods shared among page objects.
- * 
- * @param <T> The type of the page object extending BasePage.
- */
-
 package ui.pages;
 
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +5,12 @@ import org.openqa.selenium.support.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
+/**
+ * Base class for page objects in the contact list application. Provides common
+ * functionality and methods shared among page objects.
+ * 
+ * @param <T> The type of the page object extending BasePage.
+ */
 public abstract class BasePage<T extends BasePage<T>> extends PageObject {
 	
 	@FindBy(id = "error")

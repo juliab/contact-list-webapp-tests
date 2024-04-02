@@ -1,9 +1,3 @@
-/**
- * This class represents the implementation of a text form field element.
- * It extends the WebElementFacadeImpl provided by Serenity and implements the TextFormField interface.
- * It provides methods to interact with and fill text form fields.
- */
-
 package ui.webelements.impl;
 
 import org.openqa.selenium.WebDriver;
@@ -12,6 +6,11 @@ import org.openqa.selenium.support.pagefactory.ElementLocator;
 import net.serenitybdd.core.pages.WebElementFacadeImpl;
 import ui.webelements.TextFormField;
 
+/**
+ * This class represents the implementation of a text form field element.
+ * It extends the WebElementFacadeImpl provided by Serenity and implements the TextFormField interface.
+ * It provides methods to interact with and fill text form fields.
+ */
 public class TextFormFieldImpl extends WebElementFacadeImpl implements TextFormField {
 
 	/**

@@ -1,8 +1,3 @@
-/**
- * This class represents the page object for the "Add User" page.
- * It provides methods to interact with the elements on this page.
- */
-
 package ui.pages;
 
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +8,10 @@ import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 import ui.webelements.TextFormField;
 
+/**
+ * This class represents the page object for the "Add User" page.
+ * It provides methods to interact with the elements on this page.
+ */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.ADD_USER_WEB_PATH)
 public class AddUserPage extends BasePage<AddUserPage> {
 

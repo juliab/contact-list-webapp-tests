@@ -1,9 +1,3 @@
-/**
- * Page object representing the Contact List page in the application under test.
- * This page displays a list of contacts and provides functionality to interact
- * with them.
- */
-
 package ui.pages;
 
 import java.util.List;
@@ -18,6 +12,11 @@ import org.openqa.selenium.support.FindBy;
 
 import model.Contact;
 
+/**
+ * Page object representing the Contact List page in the application under test.
+ * This page displays a list of contacts and provides functionality to interact
+ * with them.
+ */
 @DefaultUrl(AppUrls.BASE_URL + AppUrls.CONTACT_LIST_WEB_PATH)
 public class ContactListPage extends BasePage<ContactListPage> {
 

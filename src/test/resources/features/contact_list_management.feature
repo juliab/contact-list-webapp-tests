@@ -37,14 +37,14 @@ Scenario: Edit existing contact from the contact list
 
 		Given my contact list contains one contact with the following details:
 			| First Name    | Last Name   | Date of Birth | Email                             | Phone         | Street Address 1   | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
-		  | Deborah       | Williams    | 1983-08-13    | DeborahEWilliams@jourrapide.com   | 580-251-4338  | 2582 Luke Lane     |                  | Duncan       | OK                  | 73533          | United States |
+		    | Deborah       | Williams    | 1983-08-13    | DeborahEWilliams@jourrapide.com   | 580-251-4338  | 2582 Luke Lane     |                  | Duncan       | OK                  | 73533          | United States |
 		And I am on the contact list page
 		
 		When I click on the contact row
 		And I click on the "Edit Contact" button
 		And I change the contact details to the following:
 			| First Name    | Last Name   | Date of Birth | Email                             | Phone         | Street Address 1     | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
-		  | Deborah       | Williams    | 1983-08-13    | DeborahEWilliams@jourrapide.com   | 580-251-4338  | 3744 Station Street  | Apartment 2C     | Oakland      | California          | 94612          | United States |
+		    | Deborah       | Williams    | 1983-08-13    | DeborahEWilliams@jourrapide.com   |               | 3744 Station Street  | Apartment 2C     | Oakland      | California          | 94612          | United States |
 		And I click on the "Submit" button to edit a contact
 		
 		Then I should see updated contact details on the page

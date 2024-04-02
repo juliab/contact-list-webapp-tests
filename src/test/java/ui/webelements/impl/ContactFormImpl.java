@@ -1,8 +1,3 @@
-/**
- * This class represents the implementation of the ContactForm widget.
- * It provides methods to interact with the contact form elements.
- */
-
 package ui.webelements.impl;
 
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +9,10 @@ import net.serenitybdd.core.pages.WidgetObjectImpl;
 import ui.webelements.ContactForm;
 import ui.webelements.TextFormField;
 
+/**
+ * This class represents the implementation of the ContactForm widget.
+ * It provides methods to interact with the contact form elements.
+ */
 public class ContactFormImpl extends WidgetObjectImpl implements ContactForm {
 
 	/**
