@@ -71,4 +71,12 @@ public class ContactApiActions extends UIInteractions {
 		assertTrue(response.isRight(), "Expected error in response but got a success");
 		assertEquals(expectedErrorMessage, response.right().getMessage());
 	}
+
+	@Then("Verify that GET contacts returns two identical contacts")
+	public void verifyThatGetContactsReturnsTwoIdenticalContacts(User user, List<Contact> contacts)
+			throws HttpException {
+		Either<ContactSuccessResponse, ContactErrorResponse> response = ContactService.getAll(user);
+		verifyThatResponseIsSuccessful(response);
+		verifyThatResponseBodyContainsValidData(response, contacts);
+	}
 }
