@@ -6,9 +6,10 @@ import io.restassured.response.Response;
 import model.Contact;
 import model.User;
 import service.dto.ContactDto;
-import service.dto.ContactErrorResponseDto;
-import service.dto.ContactSuccessResponseDto;
+import service.dto.ContactErrorResponse;
+import service.dto.ContactSuccessResponse;
 import utils.AppUrls;
+import java.util.List;
 
 import static io.restassured.RestAssured.*;
 
@@ -37,7 +38,7 @@ public class ContactService {
 	 *         response
 	 * @throws HttpException if the user does not have a token
 	 */
-	public static Either<ContactSuccessResponseDto, ContactErrorResponseDto> add(User user, Contact contact)
+	public static Either<ContactSuccessResponse, ContactErrorResponse> add(User user, Contact contact)
 			throws HttpException {
 
 		Response response = given()
@@ -49,13 +50,42 @@ public class ContactService {
 				.body(contact).post();
 
 		Logger.log("Add contact REST response", response.asPrettyString());
-		
+
 		if (response.statusCode() == HttpStatus.SC_CREATED) {
 			ContactDto contactDto = response.body().as(ContactDto.class);
-			return Either.left(new ContactSuccessResponseDto(response.statusCode(), contactDto));
+			return Either.left(new ContactSuccessResponse(response.statusCode(), contactDto));
 		}
 
-		ContactErrorResponseDto errorResponse = response.body().as(ContactErrorResponseDto.class);
+		ContactErrorResponse errorResponse = response.body().as(ContactErrorResponse.class);
 		return Either.right(errorResponse);
 	}
+
+	/**
+	 * Retrieves all contacts from the user's contact list.
+	 * 
+	 * @param user the user to retrieve contacts for
+	 * @return a response object containing either a success response or an error
+	 *         response
+	 * @throws HttpException if the user does not have a token
+	 */
+	public static Either<ContactSuccessResponse, ContactErrorResponse> getAll(User user) throws HttpException {
+		Response response = given()
+				.baseUri(AppUrls.BASE_URL)
+				.basePath(AppUrls.GET_CONTACTS_SERVICE_PATH)
+				.accept(ContentType.JSON)
+				.contentType(ContentType.JSON)
+				.header(getAuthHeader(user))
+				.get();
+
+		Logger.log("Get contacts REST response", response.asPrettyString());
+
+		if (response.statusCode() == HttpStatus.SC_OK) {
+			List<ContactDto> contactDtos = response.body().jsonPath().getList(".", ContactDto.class);
+			return Either.left(new ContactSuccessResponse(response.statusCode(), contactDtos));
+		}
+
+		ContactErrorResponse errorResponse = response.body().as(ContactErrorResponse.class);
+		return Either.right(errorResponse);
+	}
+
 }

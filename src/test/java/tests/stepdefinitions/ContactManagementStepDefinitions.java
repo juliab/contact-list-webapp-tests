@@ -50,7 +50,7 @@ public class ContactManagementStepDefinitions {
 	@Before(value = "@Contacts")
 	public void registerUser() throws HttpException {
 		UserService.add(user);
-		Logger.logUserInfo(user.toString());
+		Logger.logUserInfo(user);
 	}
 
 	@Given("I am on the contact list page")

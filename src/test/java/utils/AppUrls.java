@@ -17,5 +17,6 @@ public class AppUrls {
 	public static final String DELETE_USER_SERVICE_PATH = "/users/me";
 	public static final String ADD_CONTACT_SERVICE_PATH = "/contacts";
 	public static final String USER_LOGIN_SERVICE_PATH = "/users/login";
+	public static final String GET_CONTACTS_SERVICE_PATH = "/contacts";
 
 }

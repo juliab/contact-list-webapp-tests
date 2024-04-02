@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import utils.Logger;
-
 /**
  * Represents a contact with various details such as name, date of birth, email,
  * address, etc. First and last name fields are mandatory, while other details
@@ -385,22 +383,6 @@ public class Contact {
 		boolean result = firstNameEquals && lastNameEquals && birthdateEquals && emailEquals && phoneEquals
 				&& street1Equals && street2Equals && cityEquals && stateProvinceEquals && postalCodeEquals
 				&& countryEquals;
-
-		if (!result) {
-			String equalityInfo = firstNameEquals ? "" : "first name, ";
-			equalityInfo += lastNameEquals ? "" : "last name, ";
-			equalityInfo += birthdateEquals ? "" : "birthdate, ";
-			equalityInfo += emailEquals ? "" : "email, ";
-			equalityInfo += phoneEquals ? "" : "phone, ";
-			equalityInfo += street1Equals ? "" : "street1, ";
-			equalityInfo += street2Equals ? "" : "street2, ";
-			equalityInfo += cityEquals ? "" : "city, ";
-			equalityInfo += stateProvinceEquals ? "" : "stateProvince, ";
-			equalityInfo += postalCodeEquals ? "" : "postalCode, ";
-			equalityInfo += countryEquals ? "" : "country";
-
-			Logger.log("Contacts are not equal", "Properties that differ: " + equalityInfo);
-		}
 
 		return result;
 	}

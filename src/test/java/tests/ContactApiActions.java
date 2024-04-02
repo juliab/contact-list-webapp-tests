@@ -7,9 +7,10 @@ import model.Contact;
 import model.User;
 import net.serenitybdd.core.steps.UIInteractions;
 import service.ContactService;
-import service.dto.ContactErrorResponseDto;
-import service.dto.ContactSuccessResponseDto;
+import service.dto.ContactErrorResponse;
+import service.dto.ContactSuccessResponse;
 import utils.Logger;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,33 +20,55 @@ import org.openqa.selenium.internal.Either;
 
 public class ContactApiActions extends UIInteractions {
 
-	private User user;
-	private Contact contact;
-	private Either<ContactSuccessResponseDto, ContactErrorResponseDto> response;
-
 	@Given("I am registered in the system as a user")
 	public void iAmRegisteredInTheSystemAsUser(User user) {
-		Logger.logUserInfo(user.toString());
-		this.user = user;
+		Logger.logUserInfo(user);
 	}
 
-	@When("I add new contact into my contact list")
-	public void iAddNewContactIntoMyContactList(Contact contact) throws HttpException {
-		Logger.log("Contact data", contact.toString());
-		this.contact = contact;
-		response = ContactService.add(user, contact);
+	@Given("I have contacts in my contact list")
+	public void iHaveContactsInMyContactList(User user, List<Contact> contacts) throws HttpException {
+		contacts.forEach(Logger::logContactData);
+		for (Contact contact : contacts) {
+			ContactService.add(user, contact);
+		}
 	}
 
-	@Then("I get success in return and response body contains valid data")
-	public void iGetSuccessInReturnAndResponseBodyContainsValidData() {
+	@When("I send POST contact request")
+	public Either<ContactSuccessResponse, ContactErrorResponse> iSendPostContactRequest(User user, Contact contact)
+			throws HttpException {
+		Logger.logContactData(contact);
+		return ContactService.add(user, contact);
+	}
+
+	@When("I send GET contacts request")
+	public Either<ContactSuccessResponse, ContactErrorResponse> iSendGetContactsRequest(User user)
+			throws HttpException {
+		return ContactService.getAll(user);
+	}
+
+	@Then("Verify that response is successful")
+	public void verifyThatResponseIsSuccessful(Either<ContactSuccessResponse, ContactErrorResponse> response) {
 		assertTrue(response.isLeft(), "Expected successful response but got an error");
-		assertEquals(contact, response.left().getContact());
+	}
+
+	@Then("Verify that response body contains valid data")
+	public void verifyThatResponseBodyContainsValidData(Either<ContactSuccessResponse, ContactErrorResponse> response,
+			List<Contact> contacts) {
+		assertEquals(contacts.size(), response.left().getContacts().size());
+		assertTrue(contacts.containsAll(response.left().getContacts()));
+		assertTrue(response.left().getContacts().containsAll(contacts));
+	}
+
+	@Then("Verify that response contains expected owner")
+	public void verifyThatResponseContainsExpectedOwner(User user,
+			Either<ContactSuccessResponse, ContactErrorResponse> response) {
 		assertEquals(user.getId(), response.left().getContactDto().getOwner());
 	}
 
-	@Then("I get error in response")
-	public void iGetErrorInResponse(String errorMessage) {
+	@Then("Verify that response is unsuccessful")
+	public void verifyThatResponseIsUnsuccessful(Either<ContactSuccessResponse, ContactErrorResponse> response,
+			String expectedErrorMessage) {
 		assertTrue(response.isRight(), "Expected error in response but got a success");
-		assertEquals(errorMessage, response.right().getMessage());
+		assertEquals(expectedErrorMessage, response.right().getMessage());
 	}
 }

@@ -4,6 +4,8 @@
 
 package utils;
 
+import model.Contact;
+import model.User;
 import net.serenitybdd.core.Serenity;
 
 public class Logger {
@@ -28,11 +30,30 @@ public class Logger {
 	}
 
 	/**
+	 * Logs user-related information with a default title "User info".
+	 *
+	 * @param user The user to be logged.
+	 */
+	public static void logUserInfo(User user) {
+		logUserInfo(user.toString());
+	}
+	
+
+	/**
 	 * Logs contact information with a default title "Contact data".
 	 *
 	 * @param info The contact information to be logged.
 	 */
 	public static void logContactData(String info) {
 		log("Contact data", info);
+	}
+
+	/**
+	 * Logs contact information with a default title "Contact data".
+	 *
+	 * @param contact The contact to be logged.
+	 */
+	public static void logContactData(Contact contact) {
+		logContactData(contact.toString());
 	}
 }

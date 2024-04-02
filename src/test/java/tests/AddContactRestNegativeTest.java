@@ -16,8 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.internal.Either;
 
 import service.UserService;
+import service.dto.ContactErrorResponse;
+import service.dto.ContactSuccessResponse;
 import model.Contact;
 import model.User;
 
@@ -31,6 +34,7 @@ public class AddContactRestNegativeTest {
 	private ContactApiActions actions;
 	private User user = User.generateTestUser();
 	private DataSource datasource = new ErrorContactDataSource();
+	private Either<ContactSuccessResponse, ContactErrorResponse> response;
 
 	@BeforeAll
 	public void createUser() throws HttpException {
@@ -41,8 +45,8 @@ public class AddContactRestNegativeTest {
 	@MethodSource("contactsProvider")
 	public void addContactFailure(String name, Contact contact, String message) throws HttpException {
 		actions.iAmRegisteredInTheSystemAsUser(user);
-		actions.iAddNewContactIntoMyContactList(contact);
-		actions.iGetErrorInResponse("Contact validation failed: " + message);
+		response = actions.iSendPostContactRequest(user, contact);
+		actions.verifyThatResponseIsUnsuccessful(response, "Contact validation failed: " + message);
 	}
 
 	private Stream<Arguments> contactsProvider() {

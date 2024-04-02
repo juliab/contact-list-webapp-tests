@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents a negative response from the Contact service.
  */
-public class ContactErrorResponseDto {
+public class ContactErrorResponse {
 
     private Map<String, ErrorDetails> errors;
     @JsonProperty("_message")
