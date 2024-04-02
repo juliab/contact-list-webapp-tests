@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="User authentication" skipped="0" tests="3" time="8.27" timestamp="2024-04-02 01:25:27"><testcase name="Successful sign out of the system"/><testcase name="Try to sign in with non-existing user data"/><testcase name="Successful sign in to the system"/></testsuite>
