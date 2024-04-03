@@ -128,7 +128,7 @@ In case Random User Generator web service is unavailable, the test framework is 
 
 The test user data, which includes the email and password, is dynamically generated for each test run using a utility method.
 
-### Parameterization
+### Parametrization
 
 Certain test classes, like `AddContactRestPositiveTest` and `AddContactRestNegativeTest` are parametrized which allows to run the same scenario multiple times with different input values. This approach reduces the amount of boilerplate code, making the tests more concise and easier to read and maintain.
 
