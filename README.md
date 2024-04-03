@@ -63,39 +63,84 @@ This project follows a standard Maven structure and is organized as follows:
 
 ## UI tests
 
+### Page Object Model
+
 The UI tests in this project are designed using the Page Object Model (POM), a design pattern that enhances test maintenance and reduces code duplication. A page object is an object-oriented class that serves as an interface to a page of the application under test.
 
 The BasePage class is the parent class for all page objects, providing common functionality that's shared across multiple pages. This includes methods for checking if a page is open, navigating to a page, and waiting for a page to load.
 
-Custom WebElement classes like ReadOnlyField, TextFormField, and ContactForm are used to encapsulate specific behavior of these elements in the application. These classes extend from Serenity classes, which provide a rich API for handling complex interactions with the web elements.
+Custom WebElement classes like `ReadOnlyField`, `TextFormField`, and `ContactForm` are used to encapsulate specific behavior of these elements in the application. These classes extend from Serenity classes, which provide a rich API for handling complex interactions with the web elements.
 
 Page objects are injected into test classes, providing a clear and concise way to write tests. Each page object encapsulates the elements of a particular page and provides methods to interact with these elements.
+
+### BDD approach
 
 The UI tests themselves are written in Gherkin language in feature files, providing a high-level description of the application's behavior.
 
 ```
-Scenario: Delete a contact from the contact list
+Given I am a registered user in the application:
+| First Name    | Last Name   | Email                         | Password       |  
+| Norman        | Stern       | NormanDStern@jourrapide.com   | hu6aeYaipha    |
+And I am signed in to the application
 
-		Given my contact list contains one contact with the following details:
-			| First Name    | Last Name   | Date of Birth | Email                        | Phone         | Street Address 1     | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
-		  	| Joshua        | Smith       | 1939-01-30    | JoshuaSSmith@dayrep.com      | 917-712-5808  | 1642 Hanover Street  |                  | New York     | NY                  | 10016          | United States |
-		And I am on the contact list page
-		
-		When I click on the contact row
-		And I click on the "Delete Contact" button
-		And I accept the confirmation dialog
-		
-		Then I should return to a Contact List page
-		And I should not see the deleted contact in my contact list
+When I click on the "Logout" button
+
+Then I should see a Main Page with the login form
 ```
 
 Step definitions map these Gherkin steps to Java code, which interacts with the page objects to execute the tests. This approach allows for clear communication of what each test is supposed to do, making the tests easier to understand and maintain.
 
 ```
-	@Given("my contact list contains one contact with the following details:")
-	public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
-		this.contact = contact;
-		ContactService.add(user, contact);
-	}
+@Given("my contact list contains one contact with the following details:")
+public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
+	this.contact = contact;
+	ContactService.add(user, contact);
+}
 ```
+
+### Test data
+
 In the Gherkin scenario, the test data is provided in a tabular format right after the Given step. Each column in the table corresponds to a field of the User or Contact object, such as "First Name", "Last Name", "Date of Birth", etc. Each row in the table represents a different User/Contact object.
+
+```
+| First Name    | Last Name   | Date of Birth | Email                             | Phone         | Street Address 1     | Street Address 2 | City         | State or Province   | Postal Code    | Country       |
+| Gertrude      | Robinson    | 1966-08-22    | GertrudeBRobinson@teleworm.us     | 303-669-1342  | 1476 Clearview Drive |                  | Denver       | CO                  | 80216          | United States |
+```
+
+### Set up and tear down
+
+To expedite the tests' run time, the setup and teardown stages for UI test scenarios are performed using REST API calls. This approach is typically faster than performing these operations through the UI, leading to more efficient tests.
+
+During the setup phase, necessary entities such as the user and contacts are created via API calls. Similarly, the teardown phase involves cleaning up the data created during the setup or test execution. This includes deleting the user created for the test scenario.
+
+## REST API tests
+
+### Contacting the web service end-points
+
+The REST API tests in this project utilize the RestAssured framework, a powerful tool for testing and validating REST services in Java. RestAssured simplifies the process of sending HTTP requests to REST endpoints and verifying the responses.
+
+The application has specific classes, namely `ContactErrorResponse` and `ContactSuccessResponse`, for deserializing the JSON response body from the web service endpoints into Java objects. Response classes contain convenience methods to convert the deserialized data into Contact model objects.
+
+### Test data
+
+Contact data for the tests is primarily sourced from the [Random User Generator](https://randomuser.me) web service. This service provides random user information, which is then transformed into Contact model objects suitable for the tests.
+
+In case Random User Generator web service is unavailable, the test framework is designed to fall back to a local JSON file. This file contains approximately 500 dummy contacts, providing a robust set of data for the tests to continue running even in the absence of the external web service.
+
+The test user data, which includes the email and password, is dynamically generated for each test run using a utility method.
+
+### Parameterization
+
+Certain test classes, like `AddContactRestPositiveTest` and `AddContactRestNegativeTest` are parametrized which allows to run the same scenario multiple times with different input values. This approach reduces the amount of boilerplate code, making the tests more concise and easier to read and maintain.
+
+## Reporting
+
+After a test run, Serenity generates a detailed report that includes information about the executed tests, their results, and any associated data.
+
+The report provides a summary of all executed tests, including the number of tests that passed, failed, or were pending.
+
+Each test is broken down into its individual steps, providing a detailed view of what each test does. This is particularly useful for understanding the flow of complex tests.
+
+The generated report is a set of static HTML files, so it can be easily deployed as a website on any web server.
+
+For reference, you can view [the most recent test report](https://juliab.github.io/contact-list-webapp-tests/target/site/serenity/).
