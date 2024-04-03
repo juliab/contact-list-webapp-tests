@@ -13,7 +13,7 @@ Furthermore, the application provides an accessible [REST API](https://documente
 - [**Cucumber**](https://cucumber.io): A tool for running automated tests written in plain language.
 - [**Rest Assured**](https://rest-assured.io): A Java library for testing RESTful APIs.
 - [**Maven**](https://maven.apache.org): Dependency management and build automation tool.
-- [**JUnit**](https://junit.org/junit5/)): Testing framework for Java programming language.
+- [**JUnit**](https://junit.org/junit5/): Testing framework for Java programming language.
 
 ## Getting Started
 To run the automated tests locally, ensure you have the following prerequisites installed:
@@ -91,10 +91,9 @@ Then I should see a Main Page with the login form
 Step definitions map these Gherkin steps to Java code, which interacts with the page objects to execute the tests. This approach allows for clear communication of what each test is supposed to do, making the tests easier to understand and maintain.
 
 ```
-@Given("my contact list contains one contact with the following details:")
-public void myContactListContainsOneContactWithTheFollowingDetails(Contact contact) throws HttpException {
-	this.contact = contact;
-	ContactService.add(user, contact);
+@When("I click on the \"Logout\" button")
+public void iClickLogoutButton() {
+	contactListPage.clickLogoutButton();
 }
 ```
 
@@ -109,7 +108,7 @@ In the Gherkin scenario, the test data is provided in a tabular format right aft
 
 ### Set up and tear down
 
-To expedite the tests' run time, the setup and teardown stages for UI test scenarios are performed using REST API calls. This approach is typically faster than performing these operations through the UI, leading to more efficient tests.
+To expedite tests' run time, the setup and teardown stages for UI test scenarios are performed using REST API calls. This approach is typically faster than performing these operations through the UI, leading to more efficient tests.
 
 During the setup phase, necessary entities such as the user and contacts are created via API calls. Similarly, the teardown phase involves cleaning up the data created during the setup or test execution. This includes deleting the user created for the test scenario.
 
