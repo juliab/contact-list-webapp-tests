@@ -1,5 +1,20 @@
 This repository contains automated Behavior-Driven Development tests for a [Contact List Web Application](https://thinking-tester-contact-list.herokuapp.com/). The tests cover Create, Read, Update, and Delete (CRUD) scenarios for both the User Interface (UI) and REST API endpoints of the application.
 
+- [About the Application Under Test](#about-the-application-under-test)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Project structure](#project-structure)
+- [UI tests](#ui-tests)
+	- [Page Object Model](#page-object-model)
+	- [BDD approach](#bdd-approach)
+	- [Test data](#test-data)
+	- [Set up and tear down](#set-up-and-tear-down)
+- [REST API tests](#rest-api-tests)
+	- [Contacting the web service end-points](#contacting-the-web-service-end-points)
+	- [Test data](#test-data-1)
+	- [Parametrization](#parametrization)
+- [Reporting](#reporting)
+
 ## About the Application Under Test
 
 [Contact List Web Application](https://thinking-tester-contact-list.herokuapp.com/) is designed solely for testing purposes and does not contain any actual data. It provides users with the functionality to manage their contact lists, allowing them to create, edit, or delete contacts as needed. Authentication is required for users to access and utilize the application's features.
